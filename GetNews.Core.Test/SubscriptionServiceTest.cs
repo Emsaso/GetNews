@@ -23,8 +23,8 @@ namespace GetNews.Core.Test
             Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
             Assert.That(email.Subject, Is.EqualTo("Bekreft abonnement på GET News"));
         }
-        
-         [Test]
+
+        [Test]
         public void TestUnsubscribedEmail()
         {
             var email = Email.UnsubscribeEmail(userEmail.Value);
@@ -41,7 +41,7 @@ namespace GetNews.Core.Test
         public void TestNewSignUp()
         {
             var result = SubscriptionService.SignUp("a@bb.com", null);
-            
+
             Assert.That(result.IsSuccess, Is.True);
             Assert.That(result.Value.Email, Is.InstanceOf<Email>());
             Assert.That(result.Value.Subscription, Is.InstanceOf<Subscription>());
@@ -63,7 +63,7 @@ namespace GetNews.Core.Test
         [Test]
         public void TestSignUpAlreadySubscribed()
         {
-            var subscription = new Subscription(userEmail.Value, SubscriptionStatus.Verified);
+            var subscription = new Subscription("kake@kake.com", SubscriptionStatus.Verified);
 
             var result = SubscriptionService.SignUp(userEmail.Value, subscription);
 
@@ -72,7 +72,7 @@ namespace GetNews.Core.Test
             Assert.That(result.Value.Subscription, Is.Null);
             Assert.That(result.Error, Is.EqualTo(SignUpError.AlreadySubscribed.ToString()));
         }
-        
+
         [Test]
         public void TestSignUpUnsubscribed()
         {
@@ -84,11 +84,11 @@ namespace GetNews.Core.Test
             Assert.That(result.Value.Email, Is.InstanceOf<Email>());
             Assert.That(result.Value.Subscription, Is.InstanceOf<Subscription>());
         }
-        
-        [TestCase (SubscriptionStatus.SignedUp, false)]
+
+        [TestCase(SubscriptionStatus.Verified, false)]
         public void TestSignUpWithExistingUnVerified(SubscriptionStatus status, bool isVerified)
         {
-            var subscription = new Subscription(userEmail.Value, status, null, isVerified, lastStatusChange:new DateOnly(2025, 4, 1));
+            var subscription = new Subscription(userEmail.Value, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
 
             var SignedUp = SubscriptionService.SignUp(subscription.EmailAddress, null);
             var SignedUp_1 = SubscriptionService.SignUp(subscription.EmailAddress, subscription);
@@ -98,25 +98,26 @@ namespace GetNews.Core.Test
             Assert.That(SignedUp_1.IsSuccess, Is.False);
             Assert.That(SignedUp_1.Error, Is.EqualTo(SignUpError.AlreadySubscribed.ToString()));
         }
-        
-        [TestCase (SubscriptionStatus.SignedUp, true)]
-        [TestCase (SubscriptionStatus.SignedUp, false)]
-        [TestCase (SubscriptionStatus.Verified, false)]
-        [TestCase (SubscriptionStatus.Unsubscribed, false)]
+
+        [TestCase(SubscriptionStatus.SignedUp, true)]
+        [TestCase(SubscriptionStatus.SignedUp, false)]
+        [TestCase(SubscriptionStatus.Verified, false)]
+        [TestCase(SubscriptionStatus.Unsubscribed, false)]
         public void TestConfirmation(SubscriptionStatus status, bool isVerified)
         {
-            var subscription = new Subscription(userEmail.Value, SubscriptionStatus.SignedUp, Guid.NewGuid(), false, lastStatusChange:new DateOnly(2025, 4, 1));
+            var subscription = new Subscription(userEmail.Value, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
 
-            var confirm = SubscriptionService.Confirm(subscription.EmailAddress, subscription.VerificationCode, subscription);
+            var confirm = SubscriptionService.Confirm(userEmail.Value, subscription.VerificationCode, subscription);
 
             Assert.That(confirm.IsSuccess, Is.True);
             Assert.That(subscription.IsVerified, Is.True);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Verified));
+            
         }
 
-        [TestCase (SubscriptionStatus.Verified, true)]
-        [TestCase (SubscriptionStatus.SignedUp, true)]
-        [TestCase (SubscriptionStatus.SignedUp, false)]
+        [TestCase(SubscriptionStatus.Verified, true)]
+        [TestCase(SubscriptionStatus.SignedUp, true)]
+        [TestCase(SubscriptionStatus.SignedUp, false)]
         public void TestInvalidConfirmation(SubscriptionStatus status, bool isVerified)
         {
             var lastStatusUpdate = new DateOnly(2025, 4, 1);
@@ -139,8 +140,8 @@ namespace GetNews.Core.Test
         [TestCase(SubscriptionStatus.Verified, false)]
         public void TestUnsubscribed(SubscriptionStatus status, bool isVerified)
         {
-            var subscription = new Subscription(userEmail.Value, status, null, isVerified, lastStatusChange:new DateOnly(2025, 4, 1));
-            var subscription_1 = new Subscription(userEmail.Value, SubscriptionStatus.Verified, null, true, lastStatusChange:new DateOnly(2025, 4, 1));
+            var subscription = new Subscription(userEmail.Value, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
+            var subscription_1 = new Subscription(userEmail.Value, SubscriptionStatus.Verified, null, true, lastStatusChange: new DateOnly(2025, 4, 1));
 
             SubscriptionService.Unsubscribe(subscription.EmailAddress, subscription);
             SubscriptionService.Unsubscribe(subscription.EmailAddress, subscription_1);
