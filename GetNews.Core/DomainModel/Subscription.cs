@@ -36,6 +36,5 @@
             return Status == SubscriptionStatus.Unsubscribed? SubscriptionStatus.SignedUp : Status++;
         }
 
-
     }
 }

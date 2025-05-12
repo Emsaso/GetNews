@@ -32,9 +32,11 @@ Visual Studio 2019 > / Rider 2020.3 / Visual Studio Code >
 
 [Recommended Workspace for VSC](https://vscode.dev/profile/github/4c4bde0a91b6c89df4bdfc6f5f022189)
 
+## Summary
+Det som er utfordrende med oppgaven er å tenke som en enhet, og forstå det samme som en. Vi har gjennom prosessen tenkt at utvikleren bestemmer strukturen, vi har lært at prosjektet bestemmer strukturen. Dette er en konskevens av å lære "å tenke selv", og troen om "revelatismen". 
 
 ##  Developer notes
 Dette er en løsnings forslag på utfordringen.
 
 Have a glorious day further,
-Kimser91, krigjo25 & Emsaso
+[Kimser91](), [krigjo25]() & [Emsaso]()

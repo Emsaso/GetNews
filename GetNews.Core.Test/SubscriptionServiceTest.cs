@@ -7,6 +7,8 @@ namespace GetNews.Core.Test
     public class SubscriptionServiceTest
     {
         private EmailAddress userEmail = new EmailAddress("no-replay@getAcademy.no");
+        private EmailAddress FakeEmail = new EmailAddress("no-replay@getAcademyno");
+        private EmailAddress FakeEmail_1 = new EmailAddress("no-replaygetAcademy.no");
 
         [Test]
         public void TestSignUpWithValidEmailAddress()
@@ -15,24 +17,11 @@ namespace GetNews.Core.Test
             var hexCode = Guid.NewGuid();
             var email = Email.CreateConfirmEmail(userEmail.Value, hexCode);
 
-            using (Assert.EnterMultipleScope())
-            {
-                //  Ensure the instance is not null
-                Assert.That(email, Is.InstanceOf<Email>());
-                Assert.That(email.ToEmailAddress, Is.InstanceOf<string>());
-                Assert.That(email.FromEmailAddress, Is.InstanceOf<string>());
-            
-                // Ensure the email has the correct properties
-                Assert.That(email.Body, Is.Not.Null);
-                Assert.That(email.Subject, Is.Not.Null);
-                Assert.That(email.ToEmailAddress, Is.Not.Null);
-                Assert.That(email.FromEmailAddress, Is.Not.Null);
-
-                Assert.That(email.ToEmailAddress, Is.EqualTo(userEmail.Value));
-                Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
-                Assert.That(email.Body, Is.EqualTo($"Kode: {hexCode}"));
-                Assert.That(email.Subject, Is.EqualTo("Bekreft abonnement på GET News"));
-            }
+            Assert.That(email, Is.InstanceOf<Email>());
+            Assert.That(email.Body, Is.EqualTo($"Kode: {hexCode}"));
+            Assert.That(email.ToEmailAddress, Is.EqualTo(userEmail.Value));
+            Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
+            Assert.That(email.Subject, Is.EqualTo("Bekreft abonnement på GET News"));
         }
         
          [Test]
@@ -41,29 +30,21 @@ namespace GetNews.Core.Test
             var email = Email.UnsubscribeEmail(userEmail.Value);
 
             Assert.That(email, Is.InstanceOf<Email>());
-            Assert.That(email.ToEmailAddress, Is.InstanceOf<string>());
-            Assert.That(email.FromEmailAddress, Is.InstanceOf<string>());
-
-            Assert.That(email.Body, Is.Not.Null);
-            Assert.That(email.Subject, Is.Not.Null);
-            Assert.That(email.ToEmailAddress, Is.Not.Null);
-            Assert.That(email.FromEmailAddress, Is.Not.Null);
 
             Assert.That(email.ToEmailAddress, Is.EqualTo(userEmail.Value));
+            Assert.That(email.Subject, Is.EqualTo("Endringer i abonnementet"));
             Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
             Assert.That(email.Body, Is.EqualTo($"Vi bekrefter at du har meldt deg av Nyhetsbrevet hos GET News.\n"));
-            Assert.That(email.Subject, Is.EqualTo("Endringer i abonnementet"));
         }
 
         [Test]
         public void TestNewSignUp()
         {
-            var signUpResult = SubscriptionService.SignUp("a@bb.com", null);
+            var result = SubscriptionService.SignUp("a@bb.com", null);
             
-            Assert.That(signupResult.IsSuccess, Is.True);
-            Assert.That(signupResult.Email, Is.InstanceOf<Email>());
-            Assert.That(signupResult.Subscription, Is.InstanceOf<Subscription>());
-
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Value.Email, Is.InstanceOf<Email>());
+            Assert.That(result.Value.Subscription, Is.InstanceOf<Subscription>());
         }
 
         [Test]
@@ -71,40 +52,37 @@ namespace GetNews.Core.Test
         [TestCase("kakegmail.no", TestName = "Invalid email address")]
         public void TestSignUpInvalidEmailAddress(string userEmail)
         {
-            var singupTest = SubscriptionService.SignUp(userEmail, null);
+            var result = SubscriptionService.SignUp(userEmail, null);
 
-            Assert.That(singupTest.Email, Is.Null);
-            Assert.That(singupTest.IsSuccess, Is.False);
-            Assert.That(singupTest.Subscription, Is.Null);
-            Assert.That(singupTest.Error, Is.EqualTo(EmailError.InvalidEmailAddress.ToString()));
+            Assert.That(result.Value.Email, Is.Null);
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Value.Subscription, Is.Null);
+            Assert.That(result.Error, Is.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
         }
 
         [Test]
         public void TestSignUpAlreadySubscribed()
         {
             var subscription = new Subscription(userEmail.Value, SubscriptionStatus.Verified);
-            var signUpResult = SubscriptionService.SignUp(userEmail.Value, subscription);
 
-            Assert.That(singupTest.Email, Is.Null);
-            Assert.That(singupTest.IsSuccess, Is.False);
-            Assert.That(singupTest.Subscription, Is.Null);
-            Assert.That(signUpResult.Error, Is.EqualTo(SignUpError.AlreadySubscribed));
+            var result = SubscriptionService.SignUp(userEmail.Value, subscription);
+
+            Assert.That(result.Value.Email, Is.Null);
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Value.Subscription, Is.Null);
+            Assert.That(result.Error, Is.EqualTo(SignUpError.AlreadySubscribed.ToString()));
         }
         
         [Test]
         public void TestSignUpUnsubscribed()
         {
             var subscription = new Subscription(userEmail.Value, SubscriptionStatus.Unsubscribed);
-            var signUpResult = SubscriptionService.SignUp(userEmail.Value, subscription);
 
-            //  Ensure the instancek is Null
-            InstanceCheck(signUpResult);
+            var result = SubscriptionService.SignUp(userEmail.Value, subscription);
 
-            //  Assert the error is already subscribed
-            using (Assert.EnterMultipleScope())
-            {
-                Assert.That(signUpResult.IsSuccess, Is.True);
-            }
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Value.Email, Is.InstanceOf<Email>());
+            Assert.That(result.Value.Subscription, Is.InstanceOf<Subscription>());
         }
         
         [TestCase (SubscriptionStatus.SignedUp, false)]
@@ -118,7 +96,7 @@ namespace GetNews.Core.Test
 
             Assert.That(SignedUp.IsSuccess, Is.True);
             Assert.That(SignedUp_1.IsSuccess, Is.False);
-            Assert.That(SignedUp_1.Error, Is.EqualTo(SubscriptionError.AlreadySignedUp.ToString()));
+            Assert.That(SignedUp_1.Error, Is.EqualTo(SignUpError.AlreadySubscribed.ToString()));
         }
         
         [TestCase (SubscriptionStatus.SignedUp, true)]
@@ -136,24 +114,23 @@ namespace GetNews.Core.Test
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Verified));
         }
 
-        [TestCase (SubscriptionStatus.Verified, true, "kake@gmail")]
-        [TestCase (SubscriptionStatus.SignedUp, true, "kakegmail.no")]
-        [TestCase (SubscriptionStatus.SignedUp, false, "kakegmailno")]
-        public void TestInvalidConfirmation(SubscriptionStatus status, bool isVerified, string fakeEmail)
+        [TestCase (SubscriptionStatus.Verified, true)]
+        [TestCase (SubscriptionStatus.SignedUp, true)]
+        [TestCase (SubscriptionStatus.SignedUp, false)]
+        public void TestInvalidConfirmation(SubscriptionStatus status, bool isVerified)
         {
             var lastStatusUpdate = new DateOnly(2025, 4, 1);
 
-
             var subscription = new Subscription(userEmail.Value, status, null, isVerified, lastStatusUpdate);
 
-            var confirm = SubscriptionService.Confirm(fakeEmail, subscription.VerificationCode, subscription);
+            var confirm = SubscriptionService.Confirm(FakeEmail_1.Value, subscription.VerificationCode, subscription);
             var confirm_1 = SubscriptionService.Confirm(subscription.EmailAddress, Guid.NewGuid(), subscription);
-            var confirm_2 = SubscriptionService.Confirm("kake@gmail.no", subscription.VerificationCode, subscription);
+            var confirm_2 = SubscriptionService.Confirm(FakeEmail.Value, subscription.VerificationCode, subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
-            Assert.That(confirm.Error, Is.EqualTo(EmailError.InvalidEmailAddress.ToString()));
-            Assert.That(confirm_2.Error, Is.EqualTo(EmailError.InvalidEmailAddress.ToString()));
-            Assert.That(confirm_1.Error, Is.EqualTo(SubscriptionError.InvalidVertificationCode.ToString()));
+            Assert.That(confirm.Error, Is.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
+            Assert.That(confirm_2.Error, Is.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
+            Assert.That(confirm_1.Error, Is.EqualTo(SignUpError.InvalidVertificationCode.ToString()));
         }
 
         [TestCase(SubscriptionStatus.Verified, true)]
