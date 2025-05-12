@@ -33,9 +33,9 @@
         
         private SubscriptionStatus NextStatus()
         {
-            if (Status == SubscriptionStatus.SignedUp) return Status = SubscriptionStatus.Verified; 
-            else if (Status == SubscriptionStatus.Verified)  return SubscriptionStatus.Unsubscribed; 
-            else return SubscriptionStatus.SignedUp;
+            //if (Status == SubscriptionStatus.SignedUp) return Status = SubscriptionStatus.Verified; 
+            //else if (Status == SubscriptionStatus.Verified)  return SubscriptionStatus.Unsubscribed; 
+            //else return SubscriptionStatus.SignedUp;
 
             return Status switch
             {
@@ -44,7 +44,7 @@
                 _ => SubscriptionStatus.SignedUp
             };
              
-            return Status == SubscriptionStatus.Unsubscribed ? SubscriptionStatus.SignedUp : Status++;
+            //return Status == SubscriptionStatus.Unsubscribed ? SubscriptionStatus.SignedUp : Status++;
 
         }
 
