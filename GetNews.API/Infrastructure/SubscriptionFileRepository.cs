@@ -2,6 +2,7 @@
 
 //  Importing necessary namespaces
 using System.Text.Json;
+using GetNews.API.ApiModel;
 using ApiSubscription = GetNews.API.PersistentModel.Subscription;
 using DomainSubscription = GetNews.Core.DomainModel.Subscription;
 
@@ -63,11 +64,25 @@ namespace GetNews.API.Infrastructure
              * This methods creates a directory for the subscription files if it doesn't exist
              * and returns the file name for the subscription.
              */
-            var dir = Path.Combine(basePath, SubscriptionsFolderName);
-            Directory.CreateDirectory(dir);
+            try
+            {
+                var email = new EmailAddress(emailAddress);
+                if (!email.IsValid()) throw new ArgumentException($"Ugyldig e-postadresse: {emailAddress}");
 
-            var safeEmail = emailAddress.Trim().ToLower();
-            return Path.Combine(dir, $"{safeEmail}.json");
+                if (string.IsNullOrEmpty(basePath)) throw new ArgumentException("Base Path må ikke være tom.");
+
+                var dir = Path.Combine(basePath, SubscriptionsFolderName);
+                Directory.CreateDirectory(dir);
+
+                var safeEmail = emailAddress.Trim().ToLower();
+                return Path.Combine(dir, $"{safeEmail}.json");
+            }
+            catch {
+                Console.WriteLine("[ERROR] Klarte ikke å generere filnavn");
+                throw;
+
+            }
+
         }
     }
 }
