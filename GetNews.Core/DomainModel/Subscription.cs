@@ -33,8 +33,8 @@
         
         private SubscriptionStatus NextStatus()
         {
-            if (Status == SubscriptionStatus.SignedUp) { return Status = SubscriptionStatus.Verified; }
-            else if (Status == SubscriptionStatus.Verified) { return SubscriptionStatus.Unsubscribed; }
+            if (Status == SubscriptionStatus.SignedUp) return Status = SubscriptionStatus.Verified; 
+            else if (Status == SubscriptionStatus.Verified)  return SubscriptionStatus.Unsubscribed; 
             else return SubscriptionStatus.SignedUp;
 
             return Status switch
