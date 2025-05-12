@@ -9,10 +9,8 @@ namespace GetNews.Core.ApplicationService
         {
             var emailAddress = new EmailAddress(emailAddressStr);
 
-            if (!emailAddress.IsValid())
-                return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
+            if (!emailAddress.IsValid()) return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
 
-            // create a new subscription object.
             if (subscription == null)
             {
                 subscription = new Subscription(emailAddressStr);
@@ -24,13 +22,13 @@ namespace GetNews.Core.ApplicationService
 
             switch (subscription.Status)
             {
-                case SubscriptionStatus.Verified or SubscriptionStatus.SignedUp:
-                    return Result<EmailAndSubscription>.Fail(SignUpError.SignedUp);
+                case SubscriptionStatus.Verified :
+                    return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySubscribed);
 
-                case SubscriptionStatus.Unsubscribed:
+                case SubscriptionStatus.Unsubscribed or SubscriptionStatus.SignedUp:
                     var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
                     return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
-
+    
                 default:
                     return Result<EmailAndSubscription>.Fail(SignUpError.Unknown);
             }
@@ -39,9 +37,7 @@ namespace GetNews.Core.ApplicationService
         public static Result<Subscription> Confirm(string userMail, Guid verificationCode, Subscription subscription)
         {
             if (subscription.VerificationCode != verificationCode) return Result<Subscription>.Fail(SignUpError.InvalidVertificationCode);
-
-            if (new EmailAddress(subscription.EmailAddress).IsEqual(userMail)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
-
+            if (!new EmailAddress(subscription.EmailAddress).IsEqual(userMail)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
             if (subscription.IsVerified && subscription.Status == SubscriptionStatus.Verified) return Result<Subscription>.Fail(SignUpError.AlreadySubscribed);
 
             subscription.ChangeStatus();
