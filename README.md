@@ -4,7 +4,7 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 
 ##  Directory tree
 
-```shell
+```sh
 ├── GetNews.API
 │   ├── ApiModel
 │   │   ├── EmailAddress.cs
@@ -46,19 +46,18 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 │
 ├── GetNews.sln
 ├── GetNewsVSC.code-workspace
-├── Plan.md
 └── README.md
 ```
 ##  Installation
 1. Clone the repository
 ```sh
-** Using Github Cli **
+Using Github Cli
 gh repo clone krigjo25/console-ConnectSimulator-cs
 
-** Using HTTPS **
+Using HTTPS
 git clone https://github.com/krigjo25/console-socialmedia-cs-cs
 
-** Using SSH**
+Using SSH
 ssh  git@github.com:krigjo25/console-ConnectSimulator-cs.git
 
 ```
@@ -67,6 +66,8 @@ ssh  git@github.com:krigjo25/console-ConnectSimulator-cs.git
 4. Done!
 
 ### Requirements
+Visual Studio 2019 > / Rider 2020.3 / Visual Studio Code >
+
 NUnit 4.3 >
 .NET Core 8.0 >
 AspNetCore 8.0 >
@@ -75,7 +76,7 @@ NUnit3TestAdapter 5.0 >
 .NetTestSdk 17.13 >
 Swasjbuckle.AspNetCore 6.6 >
 ~~Microsoft.Extensions.Logging" 9 >~~
-Visual Studio 2019 > / Rider 2020.3 / Visual Studio Code >
+
 
 [Recommended Workspace for VSC](https://vscode.dev/profile/github/4c4bde0a91b6c89df4bdfc6f5f022189)
 
