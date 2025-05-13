@@ -2,6 +2,15 @@
 GetNews prosjektet handler om å bygge et backend for et Nyhets brev, der en brukeren kan både melde intresse,
 vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 
+```mermaid
+sequenceDiagram
+    actor User
+    participant WebPage
+    participant API
+    User ->> WebPage: Subscribe(email)
+    WebPage ->> API: POST /Subscribe
+```
+
 ##  Directory tree
 
 ```sh
