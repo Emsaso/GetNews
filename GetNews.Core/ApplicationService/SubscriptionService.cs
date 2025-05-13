@@ -40,7 +40,7 @@ namespace GetNews.Core.ApplicationService
             if (!new EmailAddress(subscription.EmailAddress).IsEqual(userMail)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
             if (subscription.IsVerified && subscription.Status == SubscriptionStatus.Verified) return Result<Subscription>.Fail(SignUpError.AlreadySubscribed);
 
-            subscription.ChangeStatus();
+            subscription.ChangeStatus(SubscriptionStatus.Verified);
 
             return Result<Subscription>.Ok(subscription);
         }
@@ -50,7 +50,7 @@ namespace GetNews.Core.ApplicationService
             if (new EmailAddress(subscription.EmailAddress).IsEqual(userMail)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
             if (!(subscription.Status == SubscriptionStatus.Verified || subscription.IsVerified)) return Result<Subscription>.Fail(SignUpError.Unknown);
             
-            subscription.ChangeStatus();
+            subscription.ChangeStatus(SubscriptionStatus.Unsubscribed);
 
             return Result<Subscription>.Ok(subscription);
 

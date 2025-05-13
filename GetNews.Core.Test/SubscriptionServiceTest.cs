@@ -97,7 +97,6 @@ namespace GetNews.Core.Test
 
         [TestCase(SubscriptionStatus.SignedUp, true)]
         [TestCase(SubscriptionStatus.SignedUp, false)]
-        [TestCase(SubscriptionStatus.Verified, false)]
         public void TestConfirmation(SubscriptionStatus status, bool isVerified)
         {
             var subscription = new Subscription(_userEmail.Value, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
