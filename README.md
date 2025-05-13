@@ -32,17 +32,17 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 │   │
 │   ├── SubscriptionController.cs
 │   ├── SubscriptionEndpoints.cs
-│   └── wwwroot
+│   └── wwwroot                             #   Inneholder frontend delen av prosjektet
 │   │   └── index.html
 │   │
 ├── GetNews.Core
 │   ├── ApplicationService
-│   │   └── SubscriptionService.cs
+│   │   └── SubscriptionService.cs          # Håndtering av registering, vertifisering og avmelding
 │   ├── GetNews.Core.csproj
 │
 ├── GetNews.Core.Test
 │   ├── GetNews.Core.Test.csproj
-│   └── SubscriptionServiceTest.cs
+│   └── SubscriptionServiceTest.cs        
 │
 ├── GetNews.sln
 ├── GetNewsVSC.code-workspace
