@@ -87,4 +87,4 @@ Det som er utfordrende med oppgaven er å tenke som en enhet, og forstå det sam
 Dette er en løsnings forslag på utfordringen.
 
 Have a glorious day further,
-[Kimser91](), [krigjo25]() & [Emsaso]()
+[Kimser91](https://github.com/Kimser91), [krigjo25]() & [Emsaso]()
