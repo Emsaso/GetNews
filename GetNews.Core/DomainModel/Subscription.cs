@@ -23,28 +23,17 @@
             LastStatusChange = lastStatusChange ?? DateOnly.FromDateTime(DateTime.Now);
         }
 
-        public void ChangeStatus()
+        public void ChangeStatus(SubscriptionStatus subscriptionStatus)
         {
-
-            Status = NextStatus();
+            if (subscriptionStatus != NextStatus()) return;
+            Status = subscriptionStatus;
             IsVerified = Status == SubscriptionStatus.Verified;
             LastStatusChange = DateOnly.FromDateTime(DateTime.Now);
         }
         
         private SubscriptionStatus NextStatus()
         {
-            //if (Status == SubscriptionStatus.SignedUp) return Status = SubscriptionStatus.Verified; 
-            //else if (Status == SubscriptionStatus.Verified)  return SubscriptionStatus.Unsubscribed; 
-            //else return SubscriptionStatus.SignedUp;
-
-            return Status switch
-            {
-                SubscriptionStatus.SignedUp => SubscriptionStatus.Verified,
-                SubscriptionStatus.Verified => SubscriptionStatus.Unsubscribed,
-                _ => SubscriptionStatus.SignedUp
-            };
-             
-            //return Status == SubscriptionStatus.Unsubscribed ? SubscriptionStatus.SignedUp : Status++;
+            return Status == SubscriptionStatus.Unsubscribed ? SubscriptionStatus.SignedUp : Status++;
 
         }
 
