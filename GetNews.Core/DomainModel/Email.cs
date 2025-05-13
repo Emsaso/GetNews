@@ -2,20 +2,23 @@
 
 namespace GetNews.Core.DomainModel
 {
-    public class Email
+   /*public class Email
+
+
     {
         public string Body { get; }
         public string Subject { get; }
         public string ToEmailAddress { get; }
         public string FromEmailAddress { get; }
+       */
 
-        public Email(string fromEmailAddress, string toEmailAddress, string subject, string body)
-        {
-            Body = body;
-            Subject = subject;
-            ToEmailAddress = toEmailAddress;
-            FromEmailAddress = fromEmailAddress;
-        }
+        public record Email (
+            string FromEmailAddress,
+            string ToEmailAddress,
+            string Subject,
+            string Body
+            )
+    {
         public static Email CreateConfirmEmail(string userEmail, Guid code)
         {
             return new Email(

@@ -1,6 +1,4 @@
-﻿// GetNews Subscription Service
-
-namespace GetNews.Core.DomainModel
+﻿namespace GetNews.Core.DomainModel
 {
     public class Subscription
     {
@@ -27,7 +25,7 @@ namespace GetNews.Core.DomainModel
 
         public void ChangeStatus()
         {
-            //  Changes the status of the subscription
+
             Status = NextStatus();
             IsVerified = Status == SubscriptionStatus.Verified;
             LastStatusChange = DateOnly.FromDateTime(DateTime.Now);
@@ -35,15 +33,20 @@ namespace GetNews.Core.DomainModel
         
         private SubscriptionStatus NextStatus()
         {
-            //  Returns the next status of the subscription
+            //if (Status == SubscriptionStatus.SignedUp) return Status = SubscriptionStatus.Verified; 
+            //else if (Status == SubscriptionStatus.Verified)  return SubscriptionStatus.Unsubscribed; 
+            //else return SubscriptionStatus.SignedUp;
+
             return Status switch
             {
                 SubscriptionStatus.SignedUp => SubscriptionStatus.Verified,
-                SubscriptionStatus.Verified => SubscriptionStatus.SignedUp,
-                _ => throw new ArgumentOutOfRangeException(nameof(Status), Status, null)
+                SubscriptionStatus.Verified => SubscriptionStatus.Unsubscribed,
+                _ => SubscriptionStatus.SignedUp
             };
-        }
+             
+            //return Status == SubscriptionStatus.Unsubscribed ? SubscriptionStatus.SignedUp : Status++;
 
+        }
 
     }
 }
