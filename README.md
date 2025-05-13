@@ -7,26 +7,26 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 ```sh
 ├── GetNews.API
 │   ├── ApiModel
-│   │   ├── EmailAddress.cs                 # ansvarlig for sjekk av inn skrevet Emailadresse
+│   │   ├── EmailAddress.cs                 # Ansvarlig for sjekk av inn skrevet Emailadresse
 │   │   ├── Email.cs                        # Ansvarlig for mottak av Email innhold fra frontend
 │   │   ├── SubscriptionSignUp.cs           # Ansvarlig for mottak av Emailadresse for sjekk i Backend
 │   │   ├── SubscriptionVerification.cs     # Ansvarlig for mottak av emailadressen og verificationCode
 │   │   └── VerificationRequest.cs          # Ansvarlig for videresending av emailadressen og verifikasjonskoden til backend
 │   │
-│   ├── AppConfig.cs                        # ansvarlig for å sette BasePath for fillagring
+│   ├── AppConfig.cs                        # Ansvarlig for å sette BasePath for fillagring
 │   ├── appsettings.Development.json
 │   ├── appsettings.json
 │   ├── GetNews.API.csproj
 │   ├── GetNews.API.http
 │   ├── Infrastructure
-│   │   ├── DummyEmailService.cs            # lager ett JSON objekt og lagrer det som en fil i Subscription mappen
-│   │   └── SubscriptionFileRepository.cs   # henter JSON objektet fra Riktig fil bestemt av Emailadressen som blir sendt med fra UI
+│   │   ├── DummyEmailService.cs            # Lager ett JSON objekt og lagrer det som en fil i Subscription mappen
+│   │   └── SubscriptionFileRepository.cs   # Henter JSON objektet fra Riktig fil bestemt av Emailadressen som blir sendt med fra UI
 │   │
-│   ├── Mapper.cs                           # inneholder DTO'er som sikrer at riktig dataflyt og at kun ønsket del av JSON ovjektet kommer dit det skal
+│   ├── Mapper.cs                           # Inneholder DTO'er som sikrer at riktig dataflyt og at kun ønsket del av JSON ovjektet kommer dit det skal
 │   ├── PersistentModel
-│   │   └── Subscription.cs                 # lager innholdet som skal lagres i "Emailen" som blir laget av DummyEmailService.cs
+│   │   └── Subscription.cs                 # Lager innholdet som skal lagres i "Emailen" som blir laget av DummyEmailService.cs
 │   │
-│   ├── Program.cs                          # henter inn avhengigheter og lytter etter API kall via MapPost
+│   ├── Program.cs                          # Henter inn avhengigheter og lytter etter API kall via MapPost
 │   ├── Properties
 │   │   └── launchSettings.json
 │   │
