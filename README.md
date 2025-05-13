@@ -7,7 +7,7 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 ```sh
 ├── GetNews.API
 │   ├── ApiModel
-│   │   ├── EmailAddress.cs                 # ansvarlig for sjekk av inskrivd Emailadresse
+│   │   ├── EmailAddress.cs                 # ansvarlig for sjekk av inn skrevet Emailadresse
 │   │   ├── Email.cs                        # Ansvarlig for mottak av Email innhold fra frontend
 │   │   ├── SubscriptionSignUp.cs           # Ansvarlig for mottak av Emailadresse for sjekk i Backend
 │   │   ├── SubscriptionVerification.cs     # Ansvarlig for mottak av emailadressen og verificationCode
