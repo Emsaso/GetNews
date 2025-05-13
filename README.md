@@ -2,6 +2,35 @@
 GetNews prosjektet handler om å bygge et backend for et Nyhets brev, der en brukeren kan både melde intresse,
 vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 
+
+## Helt overordnet
+
+Tre prosjekter: 
+- API
+- Core
+- Test
+
+Forklare. Hvorfor? Hva skal hvor?
+
+Ulike modeller og mapping. 
+
+Forklare mønsteret IO -> kalle kjerne -> IO
+Ev. IO -> kalle kjerne -> IO -> kalle kjerne -> IO
+
+Vise til video fra youtube
+
+### API
+Hva er det viktigste her?
+- Program
+- SubscriptionController
+
+### Core
+
+
+### Test
+
+
+
 ```mermaid
 sequenceDiagram
     actor User
