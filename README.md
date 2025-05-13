@@ -7,26 +7,26 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 ```sh
 ├── GetNews.API
 │   ├── ApiModel
-│   │   ├── EmailAddress.cs                 // Ansvarlig for håndtering og kontroll av emailadressen
-│   │   ├── Email.cs                        // Ansvarlig for sending av Email
-│   │   ├── SubscriptionSignUp.cs
-│   │   ├── SubscriptionVerification.cs
-│   │   └── VerificationRequest.cs
+│   │   ├── EmailAddress.cs                 # ansvarlig for sjekk av inskrivd Emailadresse
+│   │   ├── Email.cs                        # Ansvarlig for mottak av Email innhold fra frontend
+│   │   ├── SubscriptionSignUp.cs           # Ansvarlig for mottak av Emailadresse for sjekk i Backend
+│   │   ├── SubscriptionVerification.cs     # Ansvarlig for mottak av emailadressen og verificationCode
+│   │   └── VerificationRequest.cs          # Ansvarlig for videresending av emailadressen og verifikasjonskoden til backend
 │   │
-│   ├── AppConfig.cs
+│   ├── AppConfig.cs                        # ansvarlig for å sette BasePath for fillagring
 │   ├── appsettings.Development.json
 │   ├── appsettings.json
 │   ├── GetNews.API.csproj
 │   ├── GetNews.API.http
 │   ├── Infrastructure
-│   │   ├── DummyEmailService.cs
-│   │   └── SubscriptionFileRepository.cs
+│   │   ├── DummyEmailService.cs            # lager ett JSON objekt og lagrer det som en fil i Subscription mappen
+│   │   └── SubscriptionFileRepository.cs   # henter JSON objektet fra Riktig fil bestemt av Emailadressen som blir sendt med fra UI
 │   │
-│   ├── Mapper.cs
+│   ├── Mapper.cs                           # inneholder DTO'er som sikrer at riktig dataflyt og at kun ønsket del av JSON ovjektet kommer dit det skal
 │   ├── PersistentModel
-│   │   └── Subscription.cs
+│   │   └── Subscription.cs                 # lager innholdet som skal lagres i "Emailen" som blir laget av DummyEmailService.cs
 │   │
-│   ├── Program.cs
+│   ├── Program.cs                          # henter inn avhengigheter og lytter etter API kall via MapPost
 │   ├── Properties
 │   │   └── launchSettings.json
 │   │
