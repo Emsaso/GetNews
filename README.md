@@ -32,7 +32,7 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 │   │
 │   ├── SubscriptionController.cs
 │   ├── SubscriptionEndpoints.cs
-│   └── wwwroot                             #   Inneholder frontend delen av prosjektet
+│   └── wwwroot                             # Inneholder frontend delen av prosjektet
 │   │   └── index.html
 │   │
 ├── GetNews.Core
