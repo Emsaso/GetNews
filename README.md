@@ -30,8 +30,8 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 │   ├── Properties
 │   │   └── launchSettings.json
 │   │
-│   ├── SubscriptionController.cs
-│   ├── SubscriptionEndpoints.cs
+│   ├── SubscriptionController.cs           # Ansvarlig for Sending og mottak av informasjon til Backend
+│   ├── SubscriptionEndpoints.cs            # Alternativ måte å ha em  Router til API om en ønsker (mer dynamisk og ryddigere enn å legge alt i Program) 
 │   └── wwwroot                             # Inneholder frontend delen av prosjektet
 │   │   └── index.html
 │   │
