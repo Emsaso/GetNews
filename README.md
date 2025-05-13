@@ -4,7 +4,7 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 
 ##  Directory tree
 
-```bash
+```shell
 ├── GetNews.API
 │   ├── ApiModel
 │   │   ├── EmailAddress.cs
@@ -12,6 +12,7 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 │   │   ├── SubscriptionSignUp.cs
 │   │   ├── SubscriptionVerification.cs
 │   │   └── VerificationRequest.cs
+│   │
 │   ├── AppConfig.cs
 │   ├── appsettings.Development.json
 │   ├── appsettings.json
@@ -20,17 +21,20 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 │   ├── Infrastructure
 │   │   ├── DummyEmailService.cs
 │   │   └── SubscriptionFileRepository.cs
+│   │
 │   ├── Mapper.cs
 │   ├── PersistentModel
 │   │   └── Subscription.cs
+│   │
 │   ├── Program.cs
 │   ├── Properties
 │   │   └── launchSettings.json
+│   │
 │   ├── SubscriptionController.cs
 │   ├── SubscriptionEndpoints.cs
 │   └── wwwroot
-│       └── index.html
-│
+│   │   └── index.html
+│   │
 ├── GetNews.Core
 │   ├── ApplicationService
 │   │   └── SubscriptionService.cs
@@ -39,6 +43,7 @@ vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 ├── GetNews.Core.Test
 │   ├── GetNews.Core.Test.csproj
 │   └── SubscriptionServiceTest.cs
+│
 ├── GetNews.sln
 ├── GetNewsVSC.code-workspace
 ├── Plan.md
