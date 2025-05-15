@@ -6,17 +6,16 @@ namespace GetNews.Core.Test
 {
     public class SubscriptionServiceTest
     {
-        
-        private readonly EmailAddress _fakeEmail;
-        private readonly EmailAddress _fakeEmail_1;
-        private readonly EmailAddress _userEmail;
+        private EmailAddress _userEmail;
+        private EmailAddress _fakeEmail;
+        private EmailAddress _fakeEmail_1;
 
-        public SubscriptionServiceTest()
+        [SetUp]
+        public void Setup()
         {
             _userEmail = new EmailAddress("no-replay@getAcademy.no");
             _fakeEmail = new EmailAddress("no-replay@getAcademyno");
             _fakeEmail_1 = new EmailAddress("no-replaygetAcademy.no");
-
         }
 
         [Test]
@@ -152,9 +151,6 @@ namespace GetNews.Core.Test
         }
 
         [TestCase(SubscriptionStatus.Verified, true)]
-        [TestCase(SubscriptionStatus.SignedUp, true)]
-        //[TestCase(SubscriptionStatus.SignedUp, false)]
-        [TestCase(SubscriptionStatus.Verified, false)]
 
         public void TestUnsubscribed(SubscriptionStatus status, bool isVerified)
         {
@@ -166,7 +162,24 @@ namespace GetNews.Core.Test
 
             Assert.That(subscription.IsVerified, Is.False);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
-            
         }
+            
+        [TestCase(SubscriptionStatus.SignedUp, true)]
+        [TestCase(SubscriptionStatus.SignedUp, false)]
+        [TestCase(SubscriptionStatus.Verified, false)]
+        public void TestUnsubscribedWithError( SubscriptionStatus status, bool isVerified)
+        {
+            var userEmail = _userEmail.Value;
+            var fakeEmail = _fakeEmail.Value;
+
+            var subscription = new Subscription(userEmail, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
+            var subscription_1 = new Subscription(fakeEmail, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
+            
+            var result = SubscriptionService.Unsubscribe(subscription_1.EmailAddress, subscription);
+            var result_1 = SubscriptionService.Unsubscribe(subscription_1.EmailAddress, subscription_1); 
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.EqualTo(SignUpError.Unknown.ToString()).Or.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
+        }
+        
     }
 }
