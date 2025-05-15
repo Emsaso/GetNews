@@ -69,12 +69,22 @@ stateDiagram-v2
 ##  TestSignUpWithSubscription
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
+    
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
 
 ```
 
 ##  TestSignUpInvalidEmailAdress
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
+****
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
 
 ```
 
@@ -82,11 +92,22 @@ stateDiagram-v2
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
 
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
+
 ```
 
 ##  TestSignUpWUnsubscribed
 ```mermaid
+
 [*] --> SubScriptionServiceTest.cs
+
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
 
 ```
 
@@ -94,28 +115,49 @@ stateDiagram-v2
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
 
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
+
 ```
 
 ##  TestConfirm
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
 
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
 ```
 
 ##  TestInvalidConfirm
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
 
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
 ```
 
 ##  TestUnsubscribed
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
 
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
 ```
 
 ##  TestUnsubscribedWithError
 ```mermaid
 [*] --> SubScriptionServiceTest.cs
 
+    AssertionState --> True
+    AssertionState --> False
+    True --> [*]
+    False --> [*]
 ```
