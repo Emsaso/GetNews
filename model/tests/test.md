@@ -54,7 +54,6 @@ stateDiagram-v2
         EmailAddress.IsValid() --> SubscriptionCheck
             
             state HandleNullSubscription
-
             HandleNullSubscription --> AssertionState
         
 
