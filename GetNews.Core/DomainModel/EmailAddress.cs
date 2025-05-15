@@ -8,7 +8,7 @@ namespace GetNews.Core.DomainModel
 
         public EmailAddress(string value)
         {
-            Value = value;
+            Value = value.Trim().ToLower();
         }
 
         public bool IsValid()
@@ -17,7 +17,7 @@ namespace GetNews.Core.DomainModel
         }
         public bool IsEqual(string emailAddress)
         {
-            return string.Equals(Value, emailAddress.Trim().ToLower(), StringComparison.OrdinalIgnoreCase);
+            return string.Equals(Value, emailAddress);
         }
     }
 }
