@@ -57,10 +57,10 @@ stateDiagram-v2
 #            CreateSubScription --> AssertionState
         
 
-    SubscriptionService.SignUp(emailAddress,null) --> AssertionState: CollectingOutputs
+    SubscriptionService.SignUp(emailAddress,null) --> AssertionState:CollectingOutputs
     
-    AssertionState --> True
-    AssertionState --> False
+    AssertionState --> True:Results.OK
+    AssertionState --> False:Results.Fail
     True --> [*]
     False --> [*]
 ```
