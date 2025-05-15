@@ -24,10 +24,13 @@ namespace GetNews.Core.ApplicationService
             {
                 case SubscriptionStatus.Verified :
                     return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySubscribed);
-
-                case SubscriptionStatus.Unsubscribed or SubscriptionStatus.SignedUp:
+                case SubscriptionStatus.SignedUp:
                     var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
                     return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
+                case SubscriptionStatus.Unsubscribed:
+                    subscription = new Subscription(emailAddressStr);
+                    var email = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
+                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(email, subscription));
     
                 default:
                     return Result<EmailAndSubscription>.Fail(SignUpError.Unknown);

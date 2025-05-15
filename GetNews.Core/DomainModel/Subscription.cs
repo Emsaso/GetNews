@@ -34,7 +34,6 @@
         private SubscriptionStatus NextStatus()
         {
            return Status == SubscriptionStatus.Unsubscribed ? SubscriptionStatus.SignedUp : Status + 1;
-
         }
 
     }

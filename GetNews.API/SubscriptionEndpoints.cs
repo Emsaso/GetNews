@@ -7,7 +7,7 @@
             var group = routes.MapGroup("/api/subscription");
 
             group.MapPost("/signup", SubscriptionController.SignUp);
-            group.MapPost("/verify", SubscriptionController.Verify);
+            group.MapPost("/verify", SubscriptionController.Confirm);
             group.MapPost("/unsubscribe", SubscriptionController.Unsubscribe);
         }
     }
