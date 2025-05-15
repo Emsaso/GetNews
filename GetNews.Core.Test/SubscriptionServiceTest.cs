@@ -138,7 +138,6 @@ namespace GetNews.Core.Test
         }
         
         [TestCase(SubscriptionStatus.Verified, true)]
-        
         public void TestInvalidConfirmation(SubscriptionStatus status, bool isVerified)
         {
             var fakeAddress = _fakeEmail.Value;
@@ -166,7 +165,6 @@ namespace GetNews.Core.Test
         }
 
         [TestCase(SubscriptionStatus.Verified, true)]
-
         public void TestUnsubscribed(SubscriptionStatus status, bool isVerified)
         {
             var subscription = new Subscription(_userEmail.Value, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
