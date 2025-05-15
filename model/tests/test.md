@@ -27,13 +27,13 @@ classDiagram
         SubscriptionServiceTest: public void TestCreateConfirmationEmail()
         SubscriptionServiceTest: public void TestCreateUnsubscribeEmail()
 ```
-****
+
 ##  TestNewSignUp
 ```mermaid
 stateDiagram-v2
 [*] --> SubscriptionServiceTest
-    SubscriptionServiceTest --> Setup: Initializing the Class variables
-    Setup --> SubscriptionService.SignUp(emailAddress, null) : Calling function
+    SubscriptionServiceTest --> Setup:Initializing the Class variables
+    Setup --> SubscriptionService.SignUp(emailAddress, null)
     
     state AssertionState <<choice>>
     state SubscriptionCheck <<choice>>
@@ -46,7 +46,6 @@ stateDiagram-v2
         state HandleInvalidEmail
         state join_state <<join>>
 
-        
         CollectingInputs --> EmailAddress.IsValid()
             EmailAddress.IsValid()--> (bool)HandleInvalidEmail
             HandleInvalidEmail  --> AssertionState
