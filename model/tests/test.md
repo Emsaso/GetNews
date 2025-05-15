@@ -12,6 +12,7 @@ classDiagram
         SubscriptionServiceTest: EmailAddress UserEmail
         SubscriptionServiceTest: EmailAddress FakeEmail
         SubscriptionServiceTest: EmailAddress FakeEmail_1
+        
         SubscriptionServiceTest: public void Setup()
         SubscriptionServiceTest: public void TestNewSignUp()
         SubscriptionServiceTest: public void TestSignUpWithSubscription()
