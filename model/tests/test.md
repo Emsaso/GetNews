@@ -33,7 +33,7 @@ classDiagram
 stateDiagram-v2
 [*] --> SubscriptionServiceTest
     SubscriptionServiceTest --> Setup:Initializing the Class variables
-    Setup --> SubscriptionService.SignUp(emailAddress, null)
+    Setup --> SubscriptionService.SignUp(emailAddress,null)
     
     state AssertionState <<choice>>
     state SubscriptionCheck <<choice>>
