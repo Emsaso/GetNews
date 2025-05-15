@@ -7,14 +7,12 @@
 title: SubscriptionServiceTest
 ---
 classDiagram
-    note "How the class is built up"
+    note for SubscriptionServiceTest "How the class is built up"
     class SubscriptionServiceTest
-        note "Class members"
         SubscriptionServiceTest: EmailAddress UserEmail
         SubscriptionServiceTest: EmailAddress FakeEmail
         SubscriptionServiceTest: EmailAddress FakeEmail_1
-        
-        note "Class functions"
+
         SubscriptionServiceTest: public void Setup()
         SubscriptionServiceTest: public void TestNewSignUp()
         SubscriptionServiceTest: public void TestSignUpWithSubscription()
