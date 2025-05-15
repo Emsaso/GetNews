@@ -33,7 +33,7 @@ classDiagram
 ```mermaid
 stateDiagram-v2
 [*] --> SubscriptionServiceTest
-    SubscriptionServiceTest --> Setup
+    TestNewSignUp --> Setup
     Setup --> SubscriptionService.SignUp(emailAddress,null):Initializing the Class variables
     
 #    state AssertionState <<choice>>
