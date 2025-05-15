@@ -47,7 +47,7 @@ namespace GetNews.Core.ApplicationService
 
         public static Result<Subscription> Unsubscribe(string userMail, Subscription subscription)
         {
-            if (!new EmailAddress(subscription.EmailAddress).IsEqual(userMail)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
+            if (!new EmailAddress(userMail).IsEqual(subscription.EmailAddress)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
             if (!(subscription.Status == SubscriptionStatus.Verified || subscription.IsVerified)) return Result<Subscription>.Fail(SignUpError.Unknown);
             
             subscription.ChangeStatus(SubscriptionStatus.Unsubscribed);
