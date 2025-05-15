@@ -57,7 +57,7 @@ stateDiagram-v2
 #            CreateSubScription --> AssertionState
         
 
-    SubscriptionService.SignUp(emailAddress, null) --> AssertionState
+    SubscriptionService.SignUp(emailAddress,null) --> AssertionState
     
     AssertionState --> True
     AssertionState --> False
