@@ -1,6 +1,5 @@
 using GetNews.Core.DomainModel;
 using GetNews.Core.ApplicationService;
-using System.Xml.Serialization;
 
 
 namespace GetNews.Core.Test
@@ -44,7 +43,7 @@ namespace GetNews.Core.Test
             Assert.That(result.Value.Email, Is.InstanceOf<Email>());
             Assert.That(result.Value.Subscription, Is.InstanceOf<Subscription>());
             Assert.That(result.Value.Subscription.EmailAddress, Is.EqualTo(emailAddress));
-            
+
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
         }
         [Test]
