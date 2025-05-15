@@ -29,18 +29,18 @@ namespace GetNews.API
             }
 
             //  Save subscriber if not null
-            if (signUpResult.Subscription != null)
+            if (signUpResult.Value.Subscription != null)
             {
-                await SubscriptionFileRepository.SaveSubscription(signUpResult.Subscription, basePath);
+                await SubscriptionFileRepository.SaveSubscription(signUpResult.Value.Subscription, basePath);
             }
 
             //  Send confirmation if email is provided
-            if (signUpResult.Email != null)
+            if (signUpResult.Value.Email != null)
             {
-                await DummyEmailService.Send(signUpResult.Email, basePath);
+                await DummyEmailService.Send(signUpResult.Value.Email, basePath);
             }
 
-            return new { IsSuccess = true, SendtEmail = signUpResult.Email != null };
+            return new { IsSuccess = true, SendtEmail = signUpResult.Value.Email != null };
         }
 
         public static async Task<object> Verify(SubscriptionVerification verification, IOptions<AppConfig> options)
@@ -71,7 +71,7 @@ namespace GetNews.API
         {
             var basePath = options.Value.BasePath;
             var email = subscriptionUnsubscribe.EmailAddress;
-
+            Console.WriteLine(email);
             var subscription = await SubscriptionFileRepository.LoadSubscription(email, basePath);
             var result = SubscriptionService.Unsubscribe(email, subscription);
 
@@ -84,7 +84,7 @@ namespace GetNews.API
                 };
             }
 
-            await SubscriptionFileRepository.SaveSubscription(result.Subscription, basePath);
+            await SubscriptionFileRepository.SaveSubscription(result.Value, basePath);
             return new { IsSuccess = true };
 
         }
