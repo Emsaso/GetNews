@@ -31,7 +31,7 @@ classDiagram
 ##  TestNewSignUp
 ```mermaid
 stateDiagram-v2
-[*] --> SubScriptionServiceTest
+[*] --> SubscriptionServiceTest
     SubscriptionServiceTest --> Setup: Initializing the Class variables
     Setup --> SubscriptionService.SignUp(emailAddress, null) : Calling function
     
@@ -68,7 +68,7 @@ stateDiagram-v2
 ```
 ##  TestSignUpWithSubscription
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
     
     AssertionState --> True
     AssertionState --> False
@@ -79,7 +79,7 @@ stateDiagram-v2
 
 ##  TestSignUpInvalidEmailAdress
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 ****
     AssertionState --> True
     AssertionState --> False
@@ -90,7 +90,7 @@ stateDiagram-v2
 
 ##  TestSignUpAlreadySubscribed
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 
     AssertionState --> True
     AssertionState --> False
@@ -102,7 +102,7 @@ stateDiagram-v2
 ##  TestSignUpWUnsubscribed
 ```mermaid
 
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 
     AssertionState --> True
     AssertionState --> False
@@ -113,7 +113,7 @@ stateDiagram-v2
 
 ##  TestSignUpWithExistingUnverified
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 
     AssertionState --> True
     AssertionState --> False
@@ -124,7 +124,7 @@ stateDiagram-v2
 
 ##  TestConfirm
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 
     AssertionState --> True
     AssertionState --> False
@@ -134,7 +134,7 @@ stateDiagram-v2
 
 ##  TestInvalidConfirm
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 
     AssertionState --> True
     AssertionState --> False
@@ -144,7 +144,7 @@ stateDiagram-v2
 
 ##  TestUnsubscribed
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 
     AssertionState --> True
     AssertionState --> False
@@ -154,7 +154,7 @@ stateDiagram-v2
 
 ##  TestUnsubscribedWithError
 ```mermaid
-[*] --> SubScriptionServiceTest.cs
+[*] --> SubscriptionServiceTest.cs
 
     AssertionState --> True
     AssertionState --> False
