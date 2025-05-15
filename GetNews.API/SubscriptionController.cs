@@ -4,6 +4,7 @@
 using GetNews.API.ApiModel;
 using GetNews.API.Infrastructure;
 using GetNews.Core.ApplicationService;
+using GetNews.Core.DomainModel;
 using Microsoft.Extensions.Options;
 
 namespace GetNews.API
@@ -43,7 +44,7 @@ namespace GetNews.API
             return new { IsSuccess = true, SendtEmail = signUpResult.Value.Email != null };
         }
 
-        public static async Task<object> Verify(SubscriptionVerification verification, IOptions<AppConfig> options)
+        public static async Task<object> Confirm(SubscriptionVerification verification, IOptions<AppConfig> options)
         {
             // IO
             var basePath = options.Value.BasePath;
