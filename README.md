@@ -28,9 +28,9 @@ Hva er det viktigste her?
 
 
 ### Test
-Først ønsker vi at du ser over [Modellering av testene](./model/testsmd) for å få et visuelt bilde av testene.
+Se over [Modellering av testene](./model/tests.md) for å få et visuelt bilde av hvordan testene fungerer.
 
-Gjennom kjerne testene har vi oppnåd en 99% grundig test der vi har testet de fleste funksjonene i koden.
+Gjennom kjerne testene har vi oppnåd en 99% grundig testing der vi har testet de fleste funksjonene i koden.
 
 
 ```mermaid
