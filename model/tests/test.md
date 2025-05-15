@@ -32,32 +32,32 @@ classDiagram
 ```mermaid
 stateDiagram-v2
 [*] --> SubscriptionServiceTest
-    SubscriptionServiceTest --> Setup:Initializing the Class variables
-    Setup --> SubscriptionService.SignUp(emailAddress,null)
+    SubscriptionServiceTest --> Setup
+    Setup --> SubscriptionService.SignUp(emailAddress,null):Initializing the Class variables
     
-    state AssertionState <<choice>>
-    state SubscriptionCheck <<choice>>
-    state EnsureEmailValidity <<choice>>
+#    state AssertionState <<choice>>
+#    state SubscriptionCheck <<choice>>
+#    state EnsureEmailValidity <<choice>>
 
-    EnsureEmailValidity
-        [*] --> EnsureEmailValidity
+#    EnsureEmailValidity
+#       [*] --> EnsureEmailValidity
+#
+#        state CollectingInputs
+#        state HandleInvalidEmail
+#        state join_state <<join>>
 
-        state CollectingInputs
-        state HandleInvalidEmail
-        state join_state <<join>>
+#        CollectingInputs --> EmailAddress.IsValid()
+#            EmailAddress.IsValid()--> (bool)HandleInvalidEmail
+#            HandleInvalidEmail  --> AssertionState
 
-        CollectingInputs --> EmailAddress.IsValid()
-            EmailAddress.IsValid()--> (bool)HandleInvalidEmail
-            HandleInvalidEmail  --> AssertionState
-
-        
-        EmailAddress.IsValid() --> SubscriptionCheck
+#        EmailAddress.IsValid() --> SubscriptionCheck
             
-            state HandleNullSubscription
-            HandleNullSubscription --> AssertionState
+#            state HandleNullSubscription
+#            HandleNullSubscription --> CreateSubScription
+#            CreateSubScription --> AssertionState
         
 
-    #SubscriptionService.SignUp(emailAddress, null) --> Assertion Test : Finished calling #the function ensures that the test returns true
+    SubscriptionService.SignUp(emailAddress, null) --> AssertionState
     
     AssertionState --> True
     AssertionState --> False
