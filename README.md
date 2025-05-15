@@ -28,12 +28,14 @@ Hva er det viktigste her?
 
 
 ### Test
+Først ønsker vi at du ser over [Modellering av testene](./model/testsmd) for å få et visuelt bilde av testene.
 
+Gjennom kjerne testene har vi oppnåd en 99% grundig test der vi har testet de fleste funksjonene i koden.
 
 
 ```mermaid
-sequenceDiagram
-    actor User
+stateDiagram-v2
+    [*] --> Service
     participant WebPage
     participant API
     User ->> WebPage: Subscribe(email)
@@ -41,6 +43,7 @@ sequenceDiagram
 ```
 
 ##  Directory tree
+[Visuell oversikt over mappe treet](./model/tree)
 
 ```sh
 ├── GetNews.API
