@@ -106,10 +106,12 @@ stateDiagram-v2
     [*] --> SigUpWithSubscription
         SigUpWithSubscription --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False --> [*]
+
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> SigUpWithSubscription:Debugg error and test again
 
 
 ```
@@ -120,10 +122,11 @@ stateDiagram-v2
     [*] --> SignUpInvalidEmailAdress
         SignUpInvalidEmailAdress --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False --> [*]
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> SigUpInvalidEmailAddress:Debugg error and test again
 
 
 ```
@@ -134,83 +137,90 @@ stateDiagram-v2
     [*] --> SignUpAlreadySubscribed
         SignUpAlreadySubscribed --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> SigUpWAlreadySubscribed:Debugg error and test again
 
 ```
 
-##  TestSignUpWUnsubscribed
+##  TestSignUpUnsubscribed
 ```mermaid
 stateDiagram-v2
-    [*] --> SignUpAlreadySubscribed
-        SignUpAlreadySubscribed --> AssertionState
+    [*] --> SignUpUnsubscribed
+        SignUpUnsubscribed --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> SigUpUnsubscribed:Debugg error and test again
 
 ```
 
 ##  TestSignUpWithExistingUnverified
 ```mermaid
 stateDiagram-v2
-    [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> AssertionState
+    [*] --> SignUpWithExistingUnverified
+        SignUpWithExistingUnverified --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> SignUpWithExistingUnverified:Debugg error and test again
 
 ```
 
 ##  TestConfirm
 ```mermaid
 stateDiagram-v2
-    [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> AssertionState
+    [*] --> Confirm
+        Confirm --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> Confirm:Debugg error and test again
 ```
 
 ##  TestInvalidConfirm
 ```mermaid
 stateDiagram-v2
-    [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> AssertionState
+    [*] --> InvalidConfirm
+        InvalidConfirm --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> InvalidConfirm:Debugg error and test again
 ```
 
 ##  TestUnsubscribed
 ```mermaid
 stateDiagram-v2
-    [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> AssertionState
+    [*] --> Unsubscribed
+        Unsubscribed --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> Unsubscribed:Debugg error and test again
 ```
 
 ##  TestUnsubscribedWithError
 ```mermaid
 stateDiagram-v2
-    [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> AssertionState
+    [*] --> UnsubscribedWithError
+        UnsubscribedWithError --> AssertionState
         
-        AssertionState --> True
-        AssertionState --> False
-        True --> [*]
-        False
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        
+        True --> [*]:Test OK
+        False --> UnsubscribedWithError:Debugg error and test again
 ```
