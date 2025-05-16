@@ -69,8 +69,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
 [*] --> TestNewSignUp
-    TestNewSignUp --> Setup
-    Setup --> SubscriptionService.SignUp(emailAddress,null):Initializing the Class variables
+    TestNewSignUp --> SubscriptionService.SignUp(emailAddress,null):Initializing the Class variables
     
 #    state AssertionState <<choice>>
 #    state SubscriptionCheck <<choice>>
@@ -105,9 +104,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SigUpWithSubscription
-        SigUpWithSubscription --> Setup
-        
-        Setup --> AssertionState
+        SigUpWithSubscription --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -121,9 +118,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> Setup
-        
-        Setup --> AssertionState
+        SignUpInvalidEmailAdress --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -137,9 +132,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpAlreadySubscribed
-        SignUpAlreadySubscribed --> Setup
-        
-        Setup --> AssertionState
+        SignUpAlreadySubscribed --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -152,9 +145,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpAlreadySubscribed
-        SignUpAlreadySubscribed --> Setup
-        
-        Setup --> AssertionState
+        SignUpAlreadySubscribed --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -167,9 +158,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> Setup
-        
-        Setup --> AssertionState
+        SignUpInvalidEmailAdress --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -182,9 +171,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> Setup
-        
-        Setup --> AssertionState
+        SignUpInvalidEmailAdress --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -196,9 +183,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> Setup
-        
-        Setup --> AssertionState
+        SignUpInvalidEmailAdress --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -210,9 +195,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> Setup
-        
-        Setup --> AssertionState
+        SignUpInvalidEmailAdress --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
@@ -224,9 +207,7 @@ stateDiagram-v2
 ```mermaid
 stateDiagram-v2
     [*] --> SignUpInvalidEmailAdress
-        SignUpInvalidEmailAdress --> Setup
-        
-        Setup --> AssertionState
+        SignUpInvalidEmailAdress --> AssertionState
         
         AssertionState --> True
         AssertionState --> False
