@@ -7,9 +7,10 @@
 title: SubscriptionServiceTest | EmailTest
 ---
 classDiagram
-    note "How the class is built up"
-    Base <|--|> SubscriptionServiceTest
     Base <|--|>  EmailTest
+    Base <|--|> SubscriptionServiceTest
+
+    note "How the class is built up"
     
     namespace GetNewsCoreTest{
 
@@ -20,8 +21,7 @@ classDiagram
         
             public void Setup()
             }
-        
-        
+
         class SubscriptionServiceTest {
             %%EmailAddress UserEmail
             %%EmailAddress FakeEmail
@@ -50,8 +50,6 @@ classDiagram
             public void TestCreateConfirmationEmail()
         }
     }
-
-
 ```
 
 ```mermaid
