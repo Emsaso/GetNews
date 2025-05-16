@@ -51,15 +51,18 @@ classDiagram
         }
     }
 ```
-
-```mermaid
+## How to test the methods
 stateDiagram-v2
-    
     [*] --> TestClass: 
-    Notes: Initializing a testClass with setup
-        TestClass --> Setup: Declear properties
-        Setup --> TestMethod: Assigning values to Properties 
-    TestMethod --> [*]: Arrange / Act / Assert (AAA)
+        Notes: Initializing a testClass with setup
+            TestClass --> Setup: Declear properties
+            Setup --> TestMethod: Assigning values to Properties 
+        TestMethod --> [*]: Arrange / Act / Assert (AAA)
+
+        AssertionState --> True:Expected output
+        AssertionState --> False:Not expected output
+        True --> [*]:Test OK
+        False --> TestMethod:Debugg error and test again
 
 
 ```
