@@ -37,9 +37,9 @@ classDiagram
             public void TestUnsubscribedWithError()
             public void SignUpInvalidEmailAddress()
             public void TestSignUpWithSubscription()
-            public void TestSignUpWithExistingUnverified()
-            
+            public void TestSignUpWithExistingUnverified()  
         }
+
         class EmailTest{
             %%EmailAddress UserEmail
             %%EmailAddress FakeEmail
