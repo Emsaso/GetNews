@@ -29,15 +29,16 @@ classDiagram
         
             %%public void Setup()
             public void TestNewSignUp()
-            public void TestSignUpWithSubscription()
-            public void SignUpInvalidEmailAddress()
+            public void TestUnsubscribed()
+            public void TestConfirmation()
             public void TestAlreadySubscribed()
             public void TestSignUpUnsubscribed()
-            public void TestSignUpWithExistingUnverified()
-            public void TestConfirmation()
             public void TestInvalidConfirmation()
-            public void TestUnsubscribed()
             public void TestUnsubscribedWithError()
+            public void SignUpInvalidEmailAddress()
+            public void TestSignUpWithSubscription()
+            public void TestSignUpWithExistingUnverified()
+            
         }
         class EmailTest{
             %%EmailAddress UserEmail
@@ -45,8 +46,8 @@ classDiagram
             %%EmailAddress FakeEmail_1
         
             %%public void Setup()
-            public void TestCreateConfirmationEmail()
             public void TestCreateUnsubscribeEmail()
+            public void TestCreateConfirmationEmail()
         }
     }
 
