@@ -59,7 +59,7 @@ stateDiagram-v2
     Notes: Initializing a testClass with setup
         TestClass --> Setup: Declear properties
         Setup --> TestMethod: Assigning values to Properties 
-    TestMethod --> [*]: Arrange / Act / Assert (AAA)
+    TestMethod --> AssertionState: Arrange / Act / Assert (AAA)
 
     AssertionState --> True:Expected output
     AssertionState --> False:Not expected output
