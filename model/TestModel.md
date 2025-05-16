@@ -65,10 +65,7 @@ stateDiagram-v2
     AssertionState --> False:Not expected output
         True --> [*]:Test OK
         False --> TestMethod:Debugg error and test again
-
-
 ```
-
 
 ##  TestNewSignUp
 ```mermaid
