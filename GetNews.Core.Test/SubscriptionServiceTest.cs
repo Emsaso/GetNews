@@ -19,33 +19,6 @@ namespace GetNews.Core.Test
         }
 
         [Test]
-        public void TestCreateConfirmationEmail()
-        {
-            var hexCode = Guid.NewGuid();
-            var emailAddress = _userEmail.Value;
-            var email = Email.CreateConfirmEmail(emailAddress, hexCode);
-
-            Assert.That(email, Is.InstanceOf<Email>());
-            Assert.That(email.Body, Is.EqualTo($"Kode: {hexCode}"));
-            Assert.That(email.ToEmailAddress, Is.EqualTo(emailAddress));
-            Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
-            Assert.That(email.Subject, Is.EqualTo("Bekreft abonnement på GET News"));
-        }
-
-        [Test]
-        public void TestCreateUnsubscribedEmail()
-        {
-            var email = Email.UnsubscribeEmail(_userEmail.Value);
-
-            Assert.That(email, Is.InstanceOf<Email>());
-
-            Assert.That(email.ToEmailAddress, Is.EqualTo(_userEmail.Value));
-            Assert.That(email.Subject, Is.EqualTo("Endringer i abonnementet"));
-            Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
-            Assert.That(email.Body, Is.EqualTo($"Vi bekrefter at du har meldt deg av Nyhetsbrevet hos GET News.\n"));
-        }
-
-        [Test]
         public void TestNewSignUp()
         {
             var emailAddress = _userEmail.Value;
@@ -61,7 +34,7 @@ namespace GetNews.Core.Test
         {
             var emailAddress = _userEmail.Value;
             var subscription = new Subscription(emailAddress, SubscriptionStatus.SignedUp, null);
-            
+
             var result = SubscriptionService.SignUp(emailAddress, subscription);
 
             Assert.That(result.IsSuccess, Is.True);
@@ -136,7 +109,7 @@ namespace GetNews.Core.Test
             Assert.That(subscription.IsVerified, Is.True);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Verified));
         }
-        
+
         [TestCase(SubscriptionStatus.Verified, true)]
         public void TestInvalidConfirmation(SubscriptionStatus status, bool isVerified)
         {
@@ -158,7 +131,7 @@ namespace GetNews.Core.Test
             Assert.That(confirm_2.IsSuccess, Is.False);
             Assert.That(confirm_3.IsSuccess, Is.False);
 
-            Assert.That(confirm.Error, Is.EqualTo(SignUpError.InvalidEmailAddress.ToString()));  
+            Assert.That(confirm.Error, Is.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
             Assert.That(confirm_2.Error, Is.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
             Assert.That(confirm_1.Error, Is.EqualTo(SignUpError.InvalidVertificationCode.ToString()));
             Assert.That(confirm_3.Error, Is.EqualTo(SignUpError.AlreadySubscribed.ToString()));
@@ -174,23 +147,52 @@ namespace GetNews.Core.Test
             Assert.That(subscription.IsVerified, Is.False);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
         }
-            
+
         [TestCase(SubscriptionStatus.SignedUp, true)]
         [TestCase(SubscriptionStatus.SignedUp, false)]
         [TestCase(SubscriptionStatus.Verified, false)]
-        public void TestUnsubscribedWithError( SubscriptionStatus status, bool isVerified)
+        public void TestUnsubscribedWithError(SubscriptionStatus status, bool isVerified)
         {
             var userEmail = _userEmail.Value;
             var fakeEmail = _fakeEmail.Value;
 
             var subscription = new Subscription(userEmail, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
             var subscription_1 = new Subscription(fakeEmail, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
-            
+
             var result = SubscriptionService.Unsubscribe(subscription_1.EmailAddress, subscription);
-            var result_1 = SubscriptionService.Unsubscribe(subscription_1.EmailAddress, subscription_1); 
+            var result_1 = SubscriptionService.Unsubscribe(subscription_1.EmailAddress, subscription_1);
             Assert.That(result.IsSuccess, Is.False);
             Assert.That(result.Error, Is.EqualTo(SignUpError.Unknown.ToString()).Or.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
         }
-        
+
+
+    /** 
+        ** Moved to EmailTest.cs
+        [Test]
+        public void TestCreateConfirmationEmail()
+        {
+            var hexCode = Guid.NewGuid();
+            var emailAddress = _userEmail.Value;
+            var email = Email.CreateConfirmEmail(emailAddress, hexCode);
+
+            Assert.That(email, Is.InstanceOf<Email>());
+            Assert.That(email.Body, Is.EqualTo($"Kode: {hexCode}"));
+            Assert.That(email.ToEmailAddress, Is.EqualTo(emailAddress));
+            Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
+            Assert.That(email.Subject, Is.EqualTo("Bekreft abonnement på GET News"));
+        }
+
+        [Test]
+        public void TestCreateUnsubscribedEmail()
+        {
+            var email = Email.UnsubscribeEmail(_userEmail.Value);
+
+            Assert.That(email, Is.InstanceOf<Email>());
+
+            Assert.That(email.ToEmailAddress, Is.EqualTo(_userEmail.Value));
+            Assert.That(email.Subject, Is.EqualTo("Endringer i abonnementet"));
+            Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
+            Assert.That(email.Body, Is.EqualTo($"Vi bekrefter at du har meldt deg av Nyhetsbrevet hos GET News.\n"));
+        }*/
     }
 }
