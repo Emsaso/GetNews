@@ -51,16 +51,18 @@ classDiagram
         }
     }
 ```
-## How to test the methods
-stateDiagram-v2
-    [*] --> TestClass: 
-        Notes: Initializing a testClass with setup
-            TestClass --> Setup: Declear properties
-            Setup --> TestMethod: Assigning values to Properties 
-        TestMethod --> [*]: Arrange / Act / Assert (AAA)
 
-        AssertionState --> True:Expected output
-        AssertionState --> False:Not expected output
+## How to test the methods
+```mermaid
+stateDiagram-v2
+[*] --> TestClass: 
+    Notes: Initializing a testClass with setup
+        TestClass --> Setup: Declear properties
+        Setup --> TestMethod: Assigning values to Properties 
+    TestMethod --> [*]: Arrange / Act / Assert (AAA)
+
+    AssertionState --> True:Expected output
+    AssertionState --> False:Not expected output
         True --> [*]:Test OK
         False --> TestMethod:Debugg error and test again
 
