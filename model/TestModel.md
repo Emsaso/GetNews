@@ -4,30 +4,67 @@
 ##  How the Class is built
 ```mermaid
 ---
-title: SubscriptionServiceTest
+title: SubscriptionServiceTest | EmailTest
 ---
 classDiagram
-    note for SubscriptionServiceTest "How the class is built up"
-    class SubscriptionServiceTest
-        SubscriptionServiceTest: EmailAddress UserEmail
-        SubscriptionServiceTest: EmailAddress FakeEmail
-        SubscriptionServiceTest: EmailAddress FakeEmail_1
+    note "How the class is built up"
+    Base <|--|> SubscriptionServiceTest
+    Base <|--|>  EmailTest
+    
+    namespace GetNewsCoreTest{
 
-        SubscriptionServiceTest: public void Setup()
-        SubscriptionServiceTest: public void TestNewSignUp()
-        SubscriptionServiceTest: public void TestSignUpWithSubscription()
-        SubscriptionServiceTest: public void SignUpInvalidEmailAddress()
-        SubscriptionServiceTest: public void TestAlreadySubscribed()
-        SubscriptionServiceTest: public void TestSignUpUnsubscribed()
-        SubscriptionServiceTest: public void TestSignUpWithExistingUnverified()
-        SubscriptionServiceTest: public void TestConfirmation()
-        SubscriptionServiceTest: public void TestInvalidConfirmation()
-        SubscriptionServiceTest: public void TestUnsubscribed()
-        SubscriptionServiceTest: public void TestUnsubscribedWithError()
+        class Base {
+            EmailAddress UserEmail
+            EmailAddress FakeEmail
+            EmailAddress FakeEmail_1
+        
+            public void Setup()
+            }
+        
+        
+        class SubscriptionServiceTest {
+            %%EmailAddress UserEmail
+            %%EmailAddress FakeEmail
+            %%EmailAddress FakeEmail_1
+        
+            %%public void Setup()
+            public void TestNewSignUp()
+            public void TestSignUpWithSubscription()
+            public void SignUpInvalidEmailAddress()
+            public void TestAlreadySubscribed()
+            public void TestSignUpUnsubscribed()
+            public void TestSignUpWithExistingUnverified()
+            public void TestConfirmation()
+            public void TestInvalidConfirmation()
+            public void TestUnsubscribed()
+            public void TestUnsubscribedWithError()
+        }
+        class EmailTest{
+            %%EmailAddress UserEmail
+            %%EmailAddress FakeEmail
+            %%EmailAddress FakeEmail_1
+        
+            %%public void Setup()
+            public void TestCreateConfirmationEmail()
+            public void TestCreateUnsubscribeEmail()
+        }
+    }
 
-        SubscriptionServiceTest: public void TestCreateConfirmationEmail()
-        SubscriptionServiceTest: public void TestCreateUnsubscribeEmail()
+
 ```
+
+```mermaid
+stateDiagram-v2
+    
+    [*] --> TestClass: 
+    Notes: Initializing a testClass with setup
+        TestClass --> Setup: Declear properties
+        Setup --> TestMethod: Assigning values to Properties 
+    TestMethod --> [*]: Arrange / Act / Assert (AAA)
+
+
+```
+
 
 ##  TestNewSignUp
 ```mermaid
@@ -67,96 +104,133 @@ stateDiagram-v2
 ```
 ##  TestSignUpWithSubscription
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-    
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SigUpWithSubscription
+        SigUpWithSubscription --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
+
 
 ```
 
 ##  TestSignUpInvalidEmailAdress
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-****
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpInvalidEmailAdress
+        SignUpInvalidEmailAdress --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
+
 
 ```
 
 ##  TestSignUpAlreadySubscribed
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpAlreadySubscribed
+        SignUpAlreadySubscribed --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
 
 ```
 
 ##  TestSignUpWUnsubscribed
 ```mermaid
-
-[*] --> SubscriptionServiceTest.cs
-
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpAlreadySubscribed
+        SignUpAlreadySubscribed --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
 
 ```
 
 ##  TestSignUpWithExistingUnverified
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpInvalidEmailAdress
+        SignUpInvalidEmailAdress --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
 
 ```
 
 ##  TestConfirm
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpInvalidEmailAdress
+        SignUpInvalidEmailAdress --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
 ```
 
 ##  TestInvalidConfirm
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpInvalidEmailAdress
+        SignUpInvalidEmailAdress --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
 ```
 
 ##  TestUnsubscribed
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpInvalidEmailAdress
+        SignUpInvalidEmailAdress --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
 ```
 
 ##  TestUnsubscribedWithError
 ```mermaid
-[*] --> SubscriptionServiceTest.cs
-
-    AssertionState --> True
-    AssertionState --> False
-    True --> [*]
-    False --> [*]
+stateDiagram-v2
+    [*] --> SignUpInvalidEmailAdress
+        SignUpInvalidEmailAdress --> Setup
+        
+        Setup --> AssertionState
+        
+        AssertionState --> True
+        AssertionState --> False
+        True --> [*]
+        False --> [*]
 ```
