@@ -1,7 +1,6 @@
 using GetNews.Core.DomainModel;
 using GetNews.Core.ApplicationService;
 
-
 namespace GetNews.Core.Test
 {
     public class SubscriptionServiceTest
@@ -37,10 +36,8 @@ namespace GetNews.Core.Test
 
             var result = SubscriptionService.SignUp(emailAddress, subscription);
 
-            Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Value.Email, Is.InstanceOf<Email>());
-            Assert.That(result.Value.Subscription, Is.InstanceOf<Subscription>());
-            Assert.That(result.Value.Subscription.EmailAddress, Is.EqualTo(emailAddress));
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.EqualTo(SignUpError.AlreadySignedUp.ToString()));
 
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
         }

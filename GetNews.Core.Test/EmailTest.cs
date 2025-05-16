@@ -1,5 +1,4 @@
 using GetNews.Core.DomainModel;
-using GetNews.Core.ApplicationService;
 
 
 namespace GetNews.Core.Test
