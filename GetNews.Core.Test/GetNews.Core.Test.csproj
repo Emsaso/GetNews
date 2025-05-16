@@ -31,4 +31,4 @@
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
-</Project>
+<ItemGroup><Compile Include="EmailTest.cs" /></ItemGroup></Project>
