@@ -17,7 +17,7 @@ namespace GetNews.API
             // IO
             var emailAddress = subscriptionSignUp.EmailAddress;
             var subscription = await SubscriptionFileRepository.LoadSubscription(emailAddress, basePath);
-
+            
             // Logikk uten IO - i kjernen
             var signUpResult = SubscriptionService.SignUp(emailAddress, subscription);
 
@@ -84,7 +84,6 @@ namespace GetNews.API
                     Error = result.Error.ToString()
                 };
             }
-
             await SubscriptionFileRepository.SaveSubscription(result.Value, basePath);
             return new { IsSuccess = true };
 

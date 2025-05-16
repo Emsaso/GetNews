@@ -8,7 +8,7 @@ namespace GetNews.Core.ApplicationService
         public static Result<EmailAndSubscription> SignUp(string emailAddressStr, Subscription? subscription)
         {
             var emailAddress = new EmailAddress(emailAddressStr);
-
+            if (subscription != null && subscription.Status == SubscriptionStatus.SignedUp) return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySignedUp);
             if (!emailAddress.IsValid()) return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
 
             if (subscription == null)
