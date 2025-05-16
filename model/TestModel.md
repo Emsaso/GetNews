@@ -68,8 +68,8 @@ stateDiagram-v2
 ##  TestNewSignUp
 ```mermaid
 stateDiagram-v2
-[*] --> TestNewSignUp
-    TestNewSignUp --> SubscriptionService.SignUp(emailAddress,null):Initializing the Class variables
+[*] --> TestNewSignUp:Collecting TestCase
+    TestNewSignUp --> SubscriptionService.SignUp(emailAddress,null): Collecting Inputs
     
 #    state AssertionState <<choice>>
 #    state SubscriptionCheck <<choice>>
@@ -95,10 +95,10 @@ stateDiagram-v2
 
     SubscriptionService.SignUp(emailAddress,null) --> AssertionState:CollectingOutputs
     
-    AssertionState --> True:Results.OK
-    AssertionState --> False:Results.Fail
-    True --> [*]
-    False --> [*]
+    AssertionState --> True:Expected output
+    AssertionState --> False:Not expected output
+    True --> [*]:Test OK
+    False --> TestNewSignUp:Debugg error and test again
 ```
 ##  TestSignUpWithSubscription
 ```mermaid
@@ -137,7 +137,7 @@ stateDiagram-v2
         AssertionState --> True
         AssertionState --> False
         True --> [*]
-        False --> [*]
+        False
 
 ```
 
@@ -150,7 +150,7 @@ stateDiagram-v2
         AssertionState --> True
         AssertionState --> False
         True --> [*]
-        False --> [*]
+        False
 
 ```
 
@@ -163,7 +163,7 @@ stateDiagram-v2
         AssertionState --> True
         AssertionState --> False
         True --> [*]
-        False --> [*]
+        False
 
 ```
 
@@ -176,7 +176,7 @@ stateDiagram-v2
         AssertionState --> True
         AssertionState --> False
         True --> [*]
-        False --> [*]
+        False
 ```
 
 ##  TestInvalidConfirm
@@ -188,7 +188,7 @@ stateDiagram-v2
         AssertionState --> True
         AssertionState --> False
         True --> [*]
-        False --> [*]
+        False
 ```
 
 ##  TestUnsubscribed
@@ -200,7 +200,7 @@ stateDiagram-v2
         AssertionState --> True
         AssertionState --> False
         True --> [*]
-        False --> [*]
+        False
 ```
 
 ##  TestUnsubscribedWithError
@@ -212,5 +212,5 @@ stateDiagram-v2
         AssertionState --> True
         AssertionState --> False
         True --> [*]
-        False --> [*]
+        False
 ```
