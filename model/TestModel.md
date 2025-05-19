@@ -16,7 +16,7 @@ classDiagram
             EmailAddress UserEmail
             EmailAddress FakeEmail
             EmailAddress FakeEmail_1
-        
+
             public void Setup()
             public void TestNewSignUp()
             public void TestUnsubscribed()
