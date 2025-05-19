@@ -75,7 +75,8 @@ namespace GetNews.Core.Test
 
             Assert.That(result.IsSuccess, Is.True);
             Assert.That(result.Value.Email, Is.InstanceOf<Email>());
-            Assert.That(result.Value.Subscription, Is.InstanceOf<Subscription>());
+            Assert.That(result.Value.Subscription, Is.EqualTo(subscription));
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
         }
 
         [TestCase(SubscriptionStatus.Verified, false)]
@@ -163,33 +164,33 @@ namespace GetNews.Core.Test
         }
 
 
-    /** 
-        ** Moved to EmailTest.cs
-        [Test]
-        public void TestCreateConfirmationEmail()
-        {
-            var hexCode = Guid.NewGuid();
-            var emailAddress = _userEmail.Value;
-            var email = Email.CreateConfirmEmail(emailAddress, hexCode);
+        /** 
+            ** Moved to EmailTest.cs
+            [Test]
+            public void TestCreateConfirmationEmail()
+            {
+                var hexCode = Guid.NewGuid();
+                var emailAddress = _userEmail.Value;
+                var email = Email.CreateConfirmEmail(emailAddress, hexCode);
 
-            Assert.That(email, Is.InstanceOf<Email>());
-            Assert.That(email.Body, Is.EqualTo($"Kode: {hexCode}"));
-            Assert.That(email.ToEmailAddress, Is.EqualTo(emailAddress));
-            Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
-            Assert.That(email.Subject, Is.EqualTo("Bekreft abonnement på GET News"));
-        }
+                Assert.That(email, Is.InstanceOf<Email>());
+                Assert.That(email.Body, Is.EqualTo($"Kode: {hexCode}"));
+                Assert.That(email.ToEmailAddress, Is.EqualTo(emailAddress));
+                Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
+                Assert.That(email.Subject, Is.EqualTo("Bekreft abonnement på GET News"));
+            }
 
-        [Test]
-        public void TestCreateUnsubscribedEmail()
-        {
-            var email = Email.UnsubscribeEmail(_userEmail.Value);
+            [Test]
+            public void TestCreateUnsubscribedEmail()
+            {
+                var email = Email.UnsubscribeEmail(_userEmail.Value);
 
-            Assert.That(email, Is.InstanceOf<Email>());
+                Assert.That(email, Is.InstanceOf<Email>());
 
-            Assert.That(email.ToEmailAddress, Is.EqualTo(_userEmail.Value));
-            Assert.That(email.Subject, Is.EqualTo("Endringer i abonnementet"));
-            Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
-            Assert.That(email.Body, Is.EqualTo($"Vi bekrefter at du har meldt deg av Nyhetsbrevet hos GET News.\n"));
-        }*/
+                Assert.That(email.ToEmailAddress, Is.EqualTo(_userEmail.Value));
+                Assert.That(email.Subject, Is.EqualTo("Endringer i abonnementet"));
+                Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
+                Assert.That(email.Body, Is.EqualTo($"Vi bekrefter at du har meldt deg av Nyhetsbrevet hos GET News.\n"));
+            }*/
     }
 }
