@@ -14,7 +14,7 @@ namespace GetNews.Core.ApplicationService
             if (!emailAddress.IsValid())
                 return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
 
-            var isUnsubscribed = subscription.Status == SubscriptionStatus.Unsubscribed;
+//            var isUnsubscribed = subscription.Status == SubscriptionStatus.Unsubscribed;
             if (subscription == null) subscription = new Subscription(emailAddressStr);
             else if(subscription.Status == SubscriptionStatus.Unsubscribed) 
                 subscription.ChangeStatus(SubscriptionStatus.SignedUp);
@@ -22,18 +22,19 @@ namespace GetNews.Core.ApplicationService
             var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
             return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
 
-            //switch (subscription.Status)
-            //{
-            //    case SubscriptionStatus.Verified:
-            //        return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySubscribed);
+//            switch (subscription.Status)
+//            {
+//                case SubscriptionStatus.Verified:
+//                    return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySubscribed);
 
-            //    case SubscriptionStatus.SignedUp:
-            //        var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
-            //        return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
+//                case SubscriptionStatus.SignedUp or SubscriptionStatus.Unsubscribed:
+//                    if (subscription.Status == SubscriptionStatus.Unsubscribed) subscription.ChangeStatus(SubscriptionStatus.SignedUp);
+//                    var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
+//                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
 
-            //    default:
-            //        return Result<EmailAndSubscription>.Fail(SignUpError.Unknown);
-            //}
+//                default:
+//                    return Result<EmailAndSubscription>.Fail(SignUpError.Unknown);
+//            }
         }
 
         public static Result<Subscription> Confirm(string userMail, Guid verificationCode, Subscription subscription)
