@@ -164,8 +164,6 @@ namespace GetNews.Core.Test
         }
 
 
-        /** 
-            ** Moved to EmailTest.cs
             [Test]
             public void TestCreateConfirmationEmail()
             {
@@ -191,6 +189,6 @@ namespace GetNews.Core.Test
                 Assert.That(email.Subject, Is.EqualTo("Endringer i abonnementet"));
                 Assert.That(email.FromEmailAddress, Is.EqualTo("getnews@dummymail.com"));
                 Assert.That(email.Body, Is.EqualTo($"Vi bekrefter at du har meldt deg av Nyhetsbrevet hos GET News.\n"));
-            }*/
+            }
     }
 }
