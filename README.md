@@ -28,19 +28,8 @@ Hva er det viktigste her?
 
 
 ### Test
-Se over [Modellering av testene](./model/tests.md) for å få et visuelt bilde av hvordan testene fungerer.
-
+Se over [Modellering av testene](./model/testModel.md) for å få et visuelt bilde av hvordan testene fungerer.
 Gjennom kjerne testene har vi oppnåd en 99% grundig testing der vi har testet de fleste funksjonene i koden.
-
-
-```mermaid
-stateDiagram-v2
-    [*] --> Service
-    participant WebPage
-    participant API
-    User ->> WebPage: Subscribe(email)
-    WebPage ->> API: POST /Subscribe
-```
 
 ##  Directory tree
 [Visuell oversikt over mappe treet](./model/tree)
