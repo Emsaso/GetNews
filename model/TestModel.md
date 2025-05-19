@@ -102,6 +102,7 @@ stateDiagram-v2
     True --> [*]:Test OK
     False --> TestNewSignUp:Debugg error and test again
 ```
+
 ##  TestSignUpWithSubscription
 ```mermaid
 stateDiagram-v2
