@@ -22,9 +22,6 @@ namespace GetNews.Core.ApplicationService
             if (!emailAddress.IsValid())
                 return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
 
-            if (subscription != null && subscription.Status == SubscriptionStatus.SignedUp)
-                return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySignedUp);
-
             //? Fjerne Disse 7 linjene og heller sette Switch på subscription.Status?
             //            var isUnsubscribed = subscription.Status == SubscriptionStatus.Unsubscribed;
             if (subscription == null) subscription = new Subscription(emailAddressStr);
