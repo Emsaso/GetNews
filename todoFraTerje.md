@@ -28,5 +28,5 @@ Forklar også hele sekvensen med ord.
 1. Oppsummer i tekst hva de sentrale klassene er - bare klassene som faktisk er nevnt i sekvensdiagrammet. Skriv hva som
 er ansvaret til hver enkelt klasse, typisk en setning per klasse. 
 
-1. Tenk gjerne gjennom om det er andre ting som med fordel kunne v�rt visualisert, men ikke lag noe diagram uten å forklare
+1. Tenk gjerne gjennom om det er andre ting som med fordel kunne væxrt visualisert, men ikke lag noe diagram uten å forklare
 diagrammet med ord - hva er det dette diagrammet viser/forklarer?
