@@ -10,7 +10,7 @@
 
 1. Oppsummere i tekst hva dere har lært så langt 
 + skrive det som en tekst til en tenkt ny utvikler som skal inn på prosjektet. 
-M�let med dette er at den nye utvikleren før en enklere onboarding enn dere har føtt, 
+Målet med dette er at den nye utvikleren før en enklere onboarding enn dere har føtt, 
 og at den nye utvikleren får med seg alle de viktige poengene. Det betyr at dere må 
 oppsummere hva de viktigste poengene er i denne arkitekturen og måten å jobbe på. 
 
@@ -28,5 +28,5 @@ Forklar også hele sekvensen med ord.
 1. Oppsummer i tekst hva de sentrale klassene er - bare klassene som faktisk er nevnt i sekvensdiagrammet. Skriv hva som
 er ansvaret til hver enkelt klasse, typisk en setning per klasse. 
 
-1. Tenk gjerne gjennom om det er andre ting som med fordel kunne væxrt visualisert, men ikke lag noe diagram uten å forklare
+1. Tenk gjerne gjennom om det er andre ting som med fordel kunne vært visualisert, men ikke lag noe diagram uten å forklare
 diagrammet med ord - hva er det dette diagrammet viser/forklarer?
