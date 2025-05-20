@@ -8,7 +8,7 @@
    Målet er at det er lett å lese hva som skjer ved hvert av de fire forskjellige utgangspunktene (ingen Subscription
    fra før - eller SignedUp, Verified eller Unsubscribed).
 
-1. Oppsummere i tekst hva dere har lært så langt  Hva har vi lært, 
+2. Oppsummere i tekst hva dere har lært så langt
 + skrive det som en tekst til en tenkt ny utvikler som skal inn på prosjektet. 
 Målet med dette er at den nye utvikleren før en enklere onboarding enn dere har føtt, 
 og at den nye utvikleren får med seg alle de viktige poengene. Det betyr at dere må 
@@ -17,7 +17,7 @@ oppsummere hva de viktigste poengene er i denne arkitekturen og måten å jobbe 
 Skriv litt om hvor i koden man måtte endret hvis man ville bruke database til persistens og hvis man ville sende e-post 
 på ekte. Ikke forklar hvordan man bruker database og sender e-post på ekte - bare hvor i koden man ville ha koblet seg på.
 
-1. Så gør vi litt mer detaljert til verks. Lag et sekvensdiagram som viser hele 
+1. Så gjør vi litt mer detaljert til verks. Lag et sekvensdiagram som viser hele 
 prosessen fra api-endpointet mottar en request til det returnerer et svar - for:
 	A: Det å tegne abonnement (subscribe/)
 	B: Det å bekrefte abonnement
