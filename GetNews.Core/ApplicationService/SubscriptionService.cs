@@ -33,6 +33,18 @@ namespace GetNews.Core.ApplicationService
 
             switch (subscription.Status)
                 {
+                /*
+                case SubscriptionStatus.SignedUp or SubscriptionStatus.Unsubscribed:
+                    var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
+                    if (subscription.Status == SubscriptionStatus.SignedUp) 
+                    {
+                        subscription.ChangeStatus(SubscriptionStatus.SignedUp);
+                        subscription.RegenerateVerificationCode();
+                        return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
+                    }
+                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
+                 */
+
                 case SubscriptionStatus.SignedUp:
                     //var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
                     return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
