@@ -23,7 +23,7 @@ namespace GetNews.Core.ApplicationService
           */
 
             var emailAddress = new EmailAddress(emailAddressStr);
-            
+            //var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
 
             if (!emailAddress.IsValid())
                 return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
@@ -34,6 +34,7 @@ namespace GetNews.Core.ApplicationService
             switch (subscription.Status)
                 {
                 case SubscriptionStatus.SignedUp:
+                    //var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
                     return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
 
                 case SubscriptionStatus.Verified:
@@ -42,7 +43,7 @@ namespace GetNews.Core.ApplicationService
                 case SubscriptionStatus.Unsubscribed:
                     subscription.ChangeStatus(SubscriptionStatus.SignedUp);
                     subscription.RegenerateVerificationCode();
-
+                    //var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
                     return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
                     
                 default:
