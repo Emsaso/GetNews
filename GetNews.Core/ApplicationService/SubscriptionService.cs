@@ -41,8 +41,7 @@ namespace GetNews.Core.ApplicationService
                     subscription.ChangeStatus(SubscriptionStatus.SignedUp);
                     subscription.RegenerateVerificationCode();
 
-                    var newMail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
-                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(newMail, subscription));
+                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
                     
                 default:
                     return Result<EmailAndSubscription>.Fail(SignUpError.Unknown);
