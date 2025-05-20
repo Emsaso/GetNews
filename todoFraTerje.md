@@ -8,7 +8,7 @@
    Målet er at det er lett å lese hva som skjer ved hvert av de fire forskjellige utgangspunktene (ingen Subscription
    fra før - eller SignedUp, Verified eller Unsubscribed).
 
-1. Oppsummere i tekst hva dere har lært så langt 
+1. Oppsummere i tekst hva dere har lært så langt  Hva har vi lært, 
 + skrive det som en tekst til en tenkt ny utvikler som skal inn på prosjektet. 
 Målet med dette er at den nye utvikleren før en enklere onboarding enn dere har føtt, 
 og at den nye utvikleren får med seg alle de viktige poengene. Det betyr at dere må 
