@@ -111,7 +111,13 @@ Swasjbuckle.AspNetCore 6.6 >
 [Recommended Workspace for VSC](https://vscode.dev/profile/github/4c4bde0a91b6c89df4bdfc6f5f022189)
 
 ## Summary
-Det som er utfordrende med oppgaven er å tenke som en enhet, og forstå det samme som en. Vi har gjennom prosessen tenkt at utvikleren bestemmer strukturen, vi har lært at prosjektet bestemmer strukturen. Dette er en konskevens av å lære "å tenke selv", og troen om "revelatismen". 
+
+<!--? Gjennom prosjektet har det vært utfordrende sette seg inn i projektet. forstå herakiet, sette seg inn i hvordan fungerer koden. 
+Der at vi har løst det med å  lage til diragram for å vise funksjonaliteten, forhold og ansvar. 
+det har vært en utfordring for å bygge team dynamikk, som vi har løst gjennom å ha en struktur i koden og spille spill på fredager 30 min -1t
+
+
+Det som er utfordrende med oppgaven er å tenke som en enhet, og forstå det samme som en. Vi har gjennom prosessen tenkt at utvikleren bestemmer strukturen, vi har lært at prosjektet bestemmer strukturen. Dette er en konskevens av å lære "å tenke selv", og troen om "revelatismen". -->
 
 ##  Developer notes
 Dette er en løsnings forslag på utfordringen.
