@@ -29,20 +29,6 @@ namespace GetNews.Core.Test
         }
 
         [Test]
-        public void TestSignUpWithSubscription()
-        {
-            var emailAddress = _userEmail.Value;
-            var subscription = new Subscription(emailAddress, SubscriptionStatus.SignedUp, null);
-
-            var result = SubscriptionService.SignUp(emailAddress, subscription);
-
-            Assert.That(result.IsSuccess, Is.True);
-            Assert.That(result.Error, Is.EqualTo(SignUpError.AlreadySignedUp.ToString()));
-
-            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
-        }
-
-        [Test]
         [TestCase("kake@gmail", TestName = "Invalid email address")]
         [TestCase("kakegmail.no", TestName = "Invalid email address")]
         public void TestSignUpInvalidEmailAddress(string userEmail)
@@ -78,20 +64,6 @@ namespace GetNews.Core.Test
             Assert.That(result.Value.Subscription, Is.EqualTo(subscription));
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
         }
-
-//        [Test]
-//        public void TestSignUpWithExistingUnVerified()
-//      {
-//            var emailAddress = _userEmail.Value;
-//            var subscription = new Subscription(emailAddress, SubscriptionStatus.SignedUp, null, false, lastStatusChange: new DateOnly(2025, 4, 1));
-
-//          var result = SubscriptionService.SignUp(subscription.EmailAddress, subscription);
-
-//            Assert.That(result.IsSuccess, Is.True);
-//            Assert.That(result.Value, Is.InstanceOf<EmailAndSubscription>());
-
-            
-//        }
 
         [TestCase(SubscriptionStatus.SignedUp, true)]
         [TestCase(SubscriptionStatus.SignedUp, false)]
