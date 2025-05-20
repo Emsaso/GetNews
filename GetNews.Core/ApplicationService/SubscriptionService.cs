@@ -7,45 +7,46 @@ namespace GetNews.Core.ApplicationService
 
         public static Result<EmailAndSubscription> SignUp(string emailAddressStr, Subscription? subscription)
         {
+          /*  var emailAddress = new EmailAddress(emailAddressStr);
+            if (subscription != null && subscription.Status == SubscriptionStatus.SignedUp)
+                return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySignedUp);
 
-            /*TODO:
-                A. Når man signer up, så er det tre mulige statuser man kan ha fra før: SignedUp, Verified og Unsubscribed. Sørg først
-                    for at dere har unit tester som sjekker om dette oppfører seg som det skal. Om det finnes en Subscription fra før, 
-                    og at status endres, så test at det ikke lages ny Subscription, men at den som returneres er den gamle - og at status
-                    er endret, om det er det riktige. 
 
-                B. Skriv koden i SubscriptionService.SignUp med så lite gjentakelse av kode som mulig. Og gjør den så lesbar som mulig. 
-                    Målet er at det er lett å lese hva som skjer ved hvert av de fire forskjellige utgangspunktene (ingen Subscription
-                    fra før - eller SignedUp, Verified eller Unsubscribed).
-            */
-            var emailAddress = new EmailAddress(emailAddressStr);
-            if (!emailAddress.IsValid())
-                return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
 
-            //? Fjerne Disse 7 linjene og heller sette Switch på subscription.Status?
-            //            var isUnsubscribed = subscription.Status == SubscriptionStatus.Unsubscribed;
-            if (subscription == null) subscription = new Subscription(emailAddressStr);
-            else if (subscription.Status == SubscriptionStatus.Unsubscribed)
+            var isUnsubscribed = subscription.Status == SubscriptionStatus.Unsubscribed;
+            
+            else if(subscription.Status == SubscriptionStatus.Unsubscribed) 
                 subscription.ChangeStatus(SubscriptionStatus.SignedUp);
 
             var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
             return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
+          */
 
-            //! Switch statement fungerer som det skal i følge testene. 
-            //            switch (subscription.Status)
-            //            {
-            //                case SubscriptionStatus.Verified:
-            //                    return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySubscribed);
+            var emailAddress = new EmailAddress(emailAddressStr);
+            var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
 
-            //                case SubscriptionStatus.SignedUp or SubscriptionStatus.Unsubscribed:
-            //                    if (subscription.Status == SubscriptionStatus.Unsubscribed) subscription.ChangeStatus(SubscriptionStatus.SignedUp);
-            //                    if (subscription == null) subscription = new Subscription(emailAddressStr);
-            //                    var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
-            //                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
+            if (!emailAddress.IsValid())
+                return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
+            if (subscription == null) subscription = new Subscription(emailAddressStr);
 
-            //                default:
-            //                    return Result<EmailAndSubscription>.Fail(SignUpError.Unknown);
-            //            }
+            switch (subscription.Status)
+                {
+                case SubscriptionStatus.SignedUp:
+                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(mail, subscription));
+
+                case SubscriptionStatus.Verified:
+                    return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySubscribed);
+
+                case SubscriptionStatus.Unsubscribed:
+                    subscription.ChangeStatus(SubscriptionStatus.SignedUp);
+                    subscription.RegenerateVerificationCode();
+
+                    var newMail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
+                    return Result<EmailAndSubscription>.Ok(new EmailAndSubscription(newMail, subscription));
+                    
+                default:
+                    return Result<EmailAndSubscription>.Fail(SignUpError.Unknown);
+                }
         }
 
         public static Result<Subscription> Confirm(string userMail, Guid verificationCode, Subscription subscription)
