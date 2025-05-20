@@ -23,7 +23,7 @@ namespace GetNews.Core.ApplicationService
           */
 
             var emailAddress = new EmailAddress(emailAddressStr);
-            //var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
+            //var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode); //Testen Feiler når variablen ligger her
 
             if (!emailAddress.IsValid())
                 return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
