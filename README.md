@@ -1,10 +1,11 @@
 #   GetNews
-GetNews prosjektet handler om å bygge et backend for et Nyhets brev, der en brukeren kan både melde intresse,
+
+GetNews prosjektet handler om å bygge et backend for et Nyhetsbrev, der en brukeren kan både melde interesse,
 vertifisere koden som blir sendt på epost og melde av nyhets brevet.
 
 
 ## Helt overordnet
-
+[Modellering av Prosjektet](./model/getnews.md)
 Tre prosjekter: 
 - API
 - Core
@@ -20,19 +21,20 @@ Ev. IO -> kalle kjerne -> IO -> kalle kjerne -> IO
 Vise til video fra youtube
 
 ### API
+[Modellering av hvordan programmet fungerer sammen](./model/apis.md)
 Hva er det viktigste her?
 - Program
 - SubscriptionController
 
 ### Core
-
+[Modellering av hvordan Core fungerer sammen](./model/core.md)
 
 ### Test
 Se over [Modellering av testene](./model/testModel.md) for å få et visuelt bilde av hvordan testene fungerer.
 Gjennom kjerne testene har vi oppnåd en 99% grundig testing der vi har testet de fleste funksjonene i koden.
 
 ##  Directory tree
-[Visuell oversikt over mappe treet](./model/tree)
+[Visuell oversikt over mappe treet](./model/tree.md)
 
 ```sh
 ├── GetNews.API
@@ -106,18 +108,14 @@ NUnit3TestAdapter 5.0 >
 .NetTestSdk 17.13 >
 Swasjbuckle.AspNetCore 6.6 >
 ~~Microsoft.Extensions.Logging" 9 >~~
-
-
 [Recommended Workspace for VSC](https://vscode.dev/profile/github/4c4bde0a91b6c89df4bdfc6f5f022189)
 
 ## Summary
 
-<!--? Gjennom prosjektet har det vært utfordrende sette seg inn i projektet. forstå herakiet, sette seg inn i hvordan fungerer koden. 
-Der at vi har løst det med å  lage til diragram for å vise funksjonaliteten, forhold og ansvar. 
-det har vært en utfordring for å bygge team dynamikk, som vi har løst gjennom å ha en struktur i koden og spille spill på fredager 30 min -1t
-
-
-Det som er utfordrende med oppgaven er å tenke som en enhet, og forstå det samme som en. Vi har gjennom prosessen tenkt at utvikleren bestemmer strukturen, vi har lært at prosjektet bestemmer strukturen. Dette er en konskevens av å lære "å tenke selv", og troen om "revelatismen". -->
+<!--? Gjennom prosjektet har det vært utfordrende å forstå herakiet, og sette seg inn i hvordan fungerer koden. 
+Vi løste det med å lage diagrammer som viser mappe herakiet, modellering av klassene, og deres ansvar ved bruk av klasse diagram.
+I begynnelsen har det vært en utfordring  med team dynamikk, og tenke som en enhet. Dette løste vi med å ha struktur i koden og spille spill på fredager  30 min -1t,
+der vi øver på kommunikasjon og team building. -->
 
 ##  Developer notes
 Dette er en løsnings forslag på utfordringen.
