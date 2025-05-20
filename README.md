@@ -121,4 +121,4 @@ der vi øver på kommunikasjon og team building. -->
 Dette er en løsnings forslag på utfordringen.
 
 Have a glorious day further,
-[Kimser91](https://github.com/Kimser91), [krigjo25]() & [Emsaso]()
+[Kimser91](https://github.com/Kimser91), [krigjo25](https://github.com/krigjo25) & [Emsaso](https://github.com/emsaso)
