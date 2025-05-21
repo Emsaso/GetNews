@@ -1,8 +1,140 @@
+<!--? Hvordan ser dette ut? 
+
+## 📌 Introduksjon til prosjektet og læringsoppsummering
+
+Velkommen som utvikler på Terje sitt prosjekt! Dette prosjektet er en modulbasert, 
+objektorientert webapplikasjon hvor hovedmålet er å håndtere nyhetsabonnement (typisk e-postbasert) med registrering, 
+verifisering og statusadministrasjon. 
+
+Alt er strukturert for å være utvidbart og lett å vedlikeholde, 
+og koden er skrevet etter prinsipper som **Pure Code** og tydelig separasjon av ansvar.
+
+### 🔍 Hva vi har lært så langt
+
+1. **Objektorientering og strukturering av kode**
+   - Vi har laget egne domeneklasser som `EmailAddress`, `Subscription`, `Email`, og `SubscriptionService`.
+   - Dette gir god kapsling av logikk og gjør det lettere å endre én del uten å påvirke resten.
+
+2. **Validering og flytkontroll**
+   - `EmailAddress` har en `IsValid()`-metode for enkel og gjenbrukbar validering.
+   - `SubscriptionService.SignUp()` håndterer ulike tilstander (`SignedUp`, `Verified`, `Unsubscribed`) 
+   med tydelig flyt basert på `SubscriptionStatus` enum.
+
+3. **Bruk av `Result<T>`-mønster**
+   - Alle operasjoner returnerer et `Result<T>`-objekt som enten representerer en suksess (`Ok`) eller en feil (`Fail`). 
+   Dette gir forutsigbar og ryddig feilbehandling.
+
+4. **Testbar og ren kode**
+   - Vi har jobbet med å gjøre logikken uavhengig av infrastruktur som database og e-postserver, 
+   slik at den kan testes isolert.
+   - Eksempel: `Email.CreateConfirmEmail()` er bare en fabrikkmetode som returnerer et `Email`-objekt, 
+   uten å faktisk sende noe.
+
+---
+
+## 🧠 Viktige punkter i arkitekturen
+
+- **Tydelig separasjon av ansvar**  
+  Domenelogikken ligger i `Core.DomainModel`. 
+  Ingen sideeffekter (som database eller e-post) skjer her – det gjør koden enklere å forstå og teste.
+
+- **Statemachine-lignende tilnærming**  
+  `Subscription.Status` styres og oppdateres eksplisitt. F.eks. hvis brukeren er `Unsubscribed`, 
+  endrer vi status til `SignedUp` og genererer en ny verifiseringskode med `RegenerateVerificationCode()`.
+
+- **Immutable design med kontrollert mutasjon**  
+  De fleste egenskaper i modellene er `get; private set;`, 
+  og kan kun endres via dedikerte metoder som `ChangeStatus()` og `Verify()`.
+
+---
+
+## 🔄 Hvis vi vil bruke database eller sende ekte e-post
+
+### 💾 Persistens (database)
+Hvis vi ønsker å lagre eller hente `Subscription`-data fra en database, vil man koble seg på her:
+- **Inngangspunkt:** `SubscriptionService.SignUp()`
+- **Hva du må gjøre:** I stedet for å jobbe direkte med `Subscription? subscription` som et parameter, 
+må du hente det fra en database basert på `emailAddressStr` hvis den finnes – og lagre endringer tilbake igjen etterpå.
+
+```csharp
+// Eksempel på hvor man ville koblet på
+data subscription = subscriptionRepository.FindByEmail(emailAddressStr); // ny kode
+```
+
+### 📧 Ekte e-postutsendelse
+Hvis du vil sende ekte e-post i stedet for å bare generere `Email`-objekter:
+- **Inngangspunkt:** Etter `Email.CreateConfirmEmail(...)` i `SubscriptionService.SignUp()`
+- **Hva du må gjøre:** Kall et `IEmailSender.Send(Email mail)`-interface eller liknende som implementeres med f.eks. SMTP.
+
+```csharp
+var mail = Email.CreateConfirmEmail(...);
+emailSender.Send(mail); // ny kode
+```
+
+---
+
+## 📆 Sekvensdiagram og forklaring
+
+### A: Tegne abonnement (`POST /subscribe`)
+-->
+```mermaid
+sequenceDiagram
+    participant Klient
+    participant API
+    participant SubscriptionService
+    participant Email
+
+    Klient->>API: POST /subscribe med e-post
+    API->>SubscriptionService: SignUp(email, subscription?)
+    SubscriptionService->>Email: CreateConfirmEmail()
+    Email-->>SubscriptionService: Email-objekt
+    SubscriptionService-->>API: Result<EmailAndSubscription>
+    API-->>Klient: 200 OK med bekreftelsesinfo
+```
+<!--
+**Forklaring:**
+- Klienten sender en forespørsel til API-et med e-post.
+- API-et sender kall til `SubscriptionService.SignUp()`.
+- Hvis e-posten er gyldig og ny/ikke-verifisert, genereres en verifiseringskode og en bekreftelses-e-post via `Email.CreateConfirmEmail()`.
+- Resultatet returneres til klienten som en bekreftelse.
+
+### B: Bekrefte abonnement (`POST /confirm`)
+-->
+```mermaid
+sequenceDiagram
+    participant Klient
+    participant API
+    participant SubscriptionService
+
+    Klient->>API: POST /confirm med kode og e-post
+    API->>SubscriptionService: Verify(email, code)
+    SubscriptionService-->>API: Result.Success/Fail
+    API-->>Klient: 200 OK eller 400 Bad Request
+```
+<!--
+**Forklaring:**
+- Klienten sender verifiseringskode og e-post.
+- API-et sender dette til `SubscriptionService.Verify()`.
+- Hvis koden stemmer, markeres abonnementet som verifisert.
+- Resultatet returneres til klienten.
+
+
+## 📦 Oppsummering
+
+Prosjektet er bygd opp for å være fleksibelt og testbart. Du kan lett plugge inn databaser og e-postsystemer uten å endre domenelogikken. 
+Dette gir deg som utvikler et solid utgangspunkt for å bygge videre eller koble opp ekte tjenester etter behov.
+
+Velkommen på laget – og spør gjerne hvis noe er uklart!
+
+-->
+
+
+
 #   GetNews - Nyhetsbrev-backend
 Prosjektet GetNews omhandler utviklingen av en backend-tjeneste for et nyhetsbrev.
 Tjenesten tillater brukere å :
 * Påmelding av nyhetsbrevet
-* Vertifisere påmelding ved hjelp av en tilsendt kode via e-post
+* Verifisere påmelding ved hjelp av en tilsendt kode via e-post
 * Melde seg av nyhetsbrevet.
 
 ## Helt overordnet
