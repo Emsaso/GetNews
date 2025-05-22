@@ -50,7 +50,7 @@ namespace GetNews.Core.Test
         }
 
         /*
-         * Del 1 - SignUp
+         * Del 2 - Test verification
          */
 
         [Test]
