@@ -58,7 +58,7 @@ namespace GetNews.API
             var subscription = await SubscriptionFileRepository.LoadSubscription(email, basePath);
 
             // Logikk uten IO - i kjernen
-            var result = SubscriptionService.Confirm(email, verificationCode, subscription);
+            var result = SubscriptionService.Verify(email, verificationCode, subscription);
 
 
             // IO

@@ -80,7 +80,7 @@ emailSender.Send(mail); // ny kode
 ```mermaid
 sequenceDiagram
     participant Klient
-    participant API
+    participant API (SubscriptionController)
     participant SubscriptionService
     participant Email
 
@@ -103,7 +103,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant Klient
-    participant API (SubscriptionController)
+    participant API 
     participant SubscriptionService
 
     Klient->>API: POST /confirm med kode og e-post
