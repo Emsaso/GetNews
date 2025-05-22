@@ -26,7 +26,7 @@ namespace GetNews.Core.ApplicationService
             return Result<EmailAndSubscription>.Ok(emailAndSubscription);
         }
 
-        public static Result<Subscription> Confirm(string userMail, Guid verificationCode, Subscription subscription)
+        public static Result<Subscription> verify(string userMail, Guid verificationCode, Subscription subscription)
         {
             if (subscription.VerificationCode != verificationCode) 
                 return Result<Subscription>.Fail(SignUpError.InvalidVertificationCode);
