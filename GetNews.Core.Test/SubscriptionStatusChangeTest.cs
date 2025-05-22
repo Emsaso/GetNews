@@ -79,7 +79,7 @@ namespace GetNews.Core.Test
             Assert.That(confirm.IsSuccess, Is.False);
             Assert.That(subscription.IsVerified, Is.False);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
-            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.InvalidVertificationCode)));
+            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.InvalidVerificationCode)));
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace GetNews.Core.Test
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
             Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.CannotVerifyWhenUnsubscribed)));
         }
-    }
+    
 
         /*
          * Del 3 - Test Unsubscribe
@@ -132,7 +132,8 @@ namespace GetNews.Core.Test
         [TestCase(SubscriptionStatus.Verified, true)]
         public void TestUnsubscribed(SubscriptionStatus status, bool isVerified)
         {
-            var subscription = new Subscription(_userEmail.Value, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
+            var userEmail = "no-replay@getAcademy.no";
+            var subscription = new Subscription(userEmail, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
 
             SubscriptionService.Unsubscribe(subscription.EmailAddress, subscription);
 
@@ -143,14 +144,15 @@ namespace GetNews.Core.Test
         [Test]
         public void TestSignUpUnsubscribed()
         {
-            var emailAddress = _userEmail.Value;
-            var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
+            var userEmail = "no-replay@getAcademy.no";
+            var subscription = new Subscription(userEmail, SubscriptionStatus.Unsubscribed);
 
-            var result = SubscriptionService.SignUp(emailAddress, subscription);
+            var result = SubscriptionService.SignUp(userEmail, subscription);
 
             Assert.That(result.IsSuccess, Is.True);
             Assert.That(result.Value.Email, Is.InstanceOf<Email>());
             Assert.That(result.Value.Subscription, Is.EqualTo(subscription));
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
         }
+    }
 }
