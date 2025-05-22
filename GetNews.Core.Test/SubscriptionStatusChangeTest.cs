@@ -123,4 +123,29 @@ namespace GetNews.Core.Test
             Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.CannotVerifyWhenUnsubscribed)));
         }
     }
+
+        [TestCase(SubscriptionStatus.Verified, true)]
+        public void TestUnsubscribed(SubscriptionStatus status, bool isVerified)
+        {
+            var subscription = new Subscription(_userEmail.Value, status, null, isVerified, lastStatusChange: new DateOnly(2025, 4, 1));
+
+            SubscriptionService.Unsubscribe(subscription.EmailAddress, subscription);
+
+            Assert.That(subscription.IsVerified, Is.False);
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
+        }
+
+        [Test]
+        public void TestSignUpUnsubscribed()
+        {
+            var emailAddress = _userEmail.Value;
+            var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
+
+            var result = SubscriptionService.SignUp(emailAddress, subscription);
+
+            Assert.That(result.IsSuccess, Is.True);
+            Assert.That(result.Value.Email, Is.InstanceOf<Email>());
+            Assert.That(result.Value.Subscription, Is.EqualTo(subscription));
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
+        }
 }
