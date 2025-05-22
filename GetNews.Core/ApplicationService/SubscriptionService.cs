@@ -28,11 +28,14 @@ namespace GetNews.Core.ApplicationService
 
         public static Result<Subscription> Confirm(string userMail, Guid verificationCode, Subscription subscription)
         {
-            if (subscription.VerificationCode != verificationCode) return Result<Subscription>.Fail(SignUpError.InvalidVertificationCode);
+            if (subscription.VerificationCode != verificationCode) 
+                return Result<Subscription>.Fail(SignUpError.InvalidVertificationCode);
 
-            if (!new EmailAddress(subscription.EmailAddress).IsEqual(userMail)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
+            if (!new EmailAddress(subscription.EmailAddress).IsEqual(userMail))
+                return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
 
-            if (subscription.IsVerified && subscription.Status == SubscriptionStatus.Verified) return Result<Subscription>.Fail(SignUpError.AlreadySubscribed);
+            if (subscription.IsVerified && subscription.Status == SubscriptionStatus.Verified) 
+                return Result<Subscription>.Fail(SignUpError.AlreadySubscribed);
 
             subscription.ChangeStatus(SubscriptionStatus.Verified);
 
@@ -43,7 +46,7 @@ namespace GetNews.Core.ApplicationService
         {
             if (!new EmailAddress(userMail).IsEqual(subscription.EmailAddress)) return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
 
-            if (subscription.Status == SubscriptionStatus.Unsubscribed) return Result<Subscription>.Fail(SignUpError.AlreadyUnsubcribed);
+            if (subscription.Status == SubscriptionStatus.Unsubscribed) return Result<Subscription>.Fail(SignUpError.AlreadyUnsubscribed);
 
             if (!(subscription.Status == SubscriptionStatus.Verified || subscription.IsVerified)) return Result<Subscription>.Fail(SignUpError.Unknown);
 

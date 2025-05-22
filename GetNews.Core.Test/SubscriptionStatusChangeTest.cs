@@ -5,9 +5,12 @@ namespace GetNews.Core.Test
 {
     internal class SubscriptionStatusChangeTest
     {
+        /*
+         * Del 1 - SignUp
+         */
 
         [Test]
-        public void TestSignUpAlreadySubscribed()
+        public void TestSignUpWhenVerified()
         {
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress, SubscriptionStatus.Verified, null, true);
@@ -19,7 +22,7 @@ namespace GetNews.Core.Test
         }
 
         [Test]
-        public void TestSignUpUnsubscribed()
+        public void TestSignUpWhenUnsubscribed()
         {
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
@@ -46,5 +49,78 @@ namespace GetNews.Core.Test
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
         }
 
+        /*
+         * Del 1 - SignUp
+         */
+
+        [Test]
+        public void TestVerifyWhenVerified()
+        {
+            var emailAddress = "no-replay@getAcademy.no";
+            var subscription = new Subscription(emailAddress, SubscriptionStatus.Verified, null, true);
+
+            var confirm = SubscriptionService.Confirm(emailAddress, Guid.NewGuid(), subscription);
+
+            Assert.That(confirm.IsSuccess, Is.False);
+            Assert.That(subscription.IsVerified, Is.True);
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Verified));
+            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.AlreadyVerified)));
+
+        }
+
+        [Test]
+        public void TestVerifyWhenSignedUpIncorrectCode()
+        {
+            var emailAddress = "no-replay@getAcademy.no";
+            var subscription = new Subscription(emailAddress);
+
+            var confirm = SubscriptionService.Confirm(emailAddress, Guid.NewGuid(), subscription);
+
+            Assert.That(confirm.IsSuccess, Is.False);
+            Assert.That(subscription.IsVerified, Is.False);
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
+            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.InvalidVertificationCode)));
+        }
+
+        [Test]
+        public void TestVerifyWhenSignedUpCorrectCode()
+        {
+            var emailAddress = "no-replay@getAcademy.no";
+            var subscription = new Subscription(emailAddress);
+
+            var confirm = SubscriptionService.Confirm(emailAddress, subscription.VerificationCode, subscription);
+
+            Assert.That(confirm.IsSuccess, Is.True);
+            Assert.That(subscription.IsVerified, Is.True);
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Verified));
+        }
+
+        [Test]
+        public void TestVerifyWhenUnsubscribedWithCorrectCode()
+        {
+            var emailAddress = "no-replay@getAcademy.no";
+            var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
+
+            var confirm = SubscriptionService.Confirm(emailAddress, subscription.VerificationCode, subscription);
+
+            Assert.That(confirm.IsSuccess, Is.False);
+            Assert.That(subscription.IsVerified, Is.True);
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
+            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.CannotVerifyWhenUnsubscribed)));
+        }
+
+        [Test]
+        public void TestVerifyWhenUnsubscribedWithIncorrectCode()
+        {
+            var emailAddress = "no-replay@getAcademy.no";
+            var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
+
+            var confirm = SubscriptionService.Confirm(emailAddress, Guid.NewGuid(), subscription);
+
+            Assert.That(confirm.IsSuccess, Is.False);
+            Assert.That(subscription.IsVerified, Is.True);
+            Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
+            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.CannotVerifyWhenUnsubscribed)));
+        }
     }
 }
