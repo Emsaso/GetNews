@@ -59,7 +59,7 @@ namespace GetNews.Core.Test
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress, SubscriptionStatus.Verified, null, true);
 
-            var confirm = SubscriptionService.Confirm(emailAddress, Guid.NewGuid(), subscription);
+            var confirm = SubscriptionService.Verify(emailAddress, Guid.NewGuid(), subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
             Assert.That(subscription.IsVerified, Is.True);
@@ -74,7 +74,7 @@ namespace GetNews.Core.Test
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress);
 
-            var confirm = SubscriptionService.Confirm(emailAddress, Guid.NewGuid(), subscription);
+            var confirm = SubscriptionService.Verify(emailAddress, Guid.NewGuid(), subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
             Assert.That(subscription.IsVerified, Is.False);
@@ -88,7 +88,7 @@ namespace GetNews.Core.Test
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress);
 
-            var confirm = SubscriptionService.Confirm(emailAddress, subscription.VerificationCode, subscription);
+            var confirm = SubscriptionService.Verify(emailAddress, subscription.VerificationCode, subscription);
 
             Assert.That(confirm.IsSuccess, Is.True);
             Assert.That(subscription.IsVerified, Is.True);
@@ -101,7 +101,7 @@ namespace GetNews.Core.Test
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
 
-            var confirm = SubscriptionService.Confirm(emailAddress, subscription.VerificationCode, subscription);
+            var confirm = SubscriptionService.Verify(emailAddress, subscription.VerificationCode, subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
             Assert.That(subscription.IsVerified, Is.True);
@@ -115,7 +115,7 @@ namespace GetNews.Core.Test
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
 
-            var confirm = SubscriptionService.Confirm(emailAddress, Guid.NewGuid(), subscription);
+            var confirm = SubscriptionService.Verify(emailAddress, Guid.NewGuid(), subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
             Assert.That(subscription.IsVerified, Is.True);
