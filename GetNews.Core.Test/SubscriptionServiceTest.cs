@@ -6,6 +6,7 @@ namespace GetNews.Core.Test
     public class SubscriptionServiceTest
     {
 
+        // TODO : Create new test for ech test cases
         [TestCase(SubscriptionStatus.SignedUp, true)]
         [TestCase(SubscriptionStatus.SignedUp, false)]
         [TestCase(SubscriptionStatus.Verified, false)]
