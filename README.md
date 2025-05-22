@@ -103,7 +103,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant Klient
-    participant API
+    participant API (SubscriptionController)
     participant SubscriptionService
 
     Klient->>API: POST /confirm med kode og e-post
