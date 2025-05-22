@@ -127,6 +127,8 @@ namespace GetNews.Core.Test
         /*
          * Del 3 - Test Unsubscribe
          */
+
+        //  TODO : Create new test for each test cases in Unsubscribiton
         [TestCase(SubscriptionStatus.Verified, true)]
         public void TestUnsubscribed(SubscriptionStatus status, bool isVerified)
         {
