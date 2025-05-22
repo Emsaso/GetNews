@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 namespace GetNews.API
 {
     public class SubscriptionController
-    {
+    { 
         public static async Task<object> SignUp(SubscriptionSignUp subscriptionSignUp, IOptions<AppConfig> options)
         {
             var basePath = options.Value.BasePath;
@@ -44,7 +44,7 @@ namespace GetNews.API
             return new { IsSuccess = true, SendtEmail = signUpResult.Value.Email != null };
         }
 
-        public static async Task<object> Confirm(SubscriptionVerification verification, IOptions<AppConfig> options)
+        public static async Task<object> Verify(SubscriptionVerification verification, IOptions<AppConfig> options)
         {
             // IO
             var basePath = options.Value.BasePath;

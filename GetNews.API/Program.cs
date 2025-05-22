@@ -15,7 +15,7 @@ app.UseStaticFiles();
 
 // Routing
 app.MapPost("/api/subscription/signup", SubscriptionController.SignUp);
-app.MapPost("/api/subscription/verify", SubscriptionController.Confirm);
+app.MapPost("/api/subscription/verify", SubscriptionController.Verify);
 app.MapPost("/api/subscription/unsubscribe", SubscriptionController.Unsubscribe);
 // Alternative Routing in new class
 //app.MapSubscriptionEndpoints();
