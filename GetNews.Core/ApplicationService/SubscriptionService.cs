@@ -26,16 +26,19 @@ namespace GetNews.Core.ApplicationService
             return Result<EmailAndSubscription>.Ok(emailAndSubscription);
         }
 
-        public static Result<Subscription> verify(string userMail, Guid verificationCode, Subscription subscription)
+        public static Result<Subscription> Verify(string userMail, Guid verificationCode, Subscription subscription)
         {
             if (subscription.VerificationCode != verificationCode) 
-                return Result<Subscription>.Fail(SignUpError.InvalidVertificationCode);
+                return Result<Subscription>.Fail(SignUpError.InvalidVerificationCode);
 
             if (!new EmailAddress(subscription.EmailAddress).IsEqual(userMail))
                 return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
 
             if (subscription.IsVerified && subscription.Status == SubscriptionStatus.Verified) 
                 return Result<Subscription>.Fail(SignUpError.AlreadySubscribed);
+            
+            if (subscription.Status == SubscriptionStatus.Unsubscribed)
+                return Result<Subscription>.Fail(SignUpError.CannotVerifyWhenUnsubscribed);
 
             subscription.ChangeStatus(SubscriptionStatus.Verified);
 
