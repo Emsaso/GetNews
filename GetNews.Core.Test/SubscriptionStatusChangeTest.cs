@@ -124,6 +124,9 @@ namespace GetNews.Core.Test
         }
     }
 
+        /*
+         * Del 3 - Test Unsubscribe
+         */
         [TestCase(SubscriptionStatus.Verified, true)]
         public void TestUnsubscribed(SubscriptionStatus status, bool isVerified)
         {
