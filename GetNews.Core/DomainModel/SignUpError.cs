@@ -13,6 +13,7 @@ namespace GetNews.Core.DomainModel
         AlreadyUnsubscribed,
         Unknown,
         AlreadyVerified,
+        SubscriptionNotFound,
         CannotVerifyWhenUnsubscribed
     }
 }

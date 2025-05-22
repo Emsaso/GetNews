@@ -48,7 +48,7 @@ namespace GetNews.Core.ApplicationService
 
             if (subscription.Status == SubscriptionStatus.Unsubscribed) return Result<Subscription>.Fail(SignUpError.AlreadyUnsubscribed);
 
-            if (!(subscription.Status == SubscriptionStatus.Verified || subscription.IsVerified)) return Result<Subscription>.Fail(SignUpError.Unknown);
+            if (!(subscription.Status == SubscriptionStatus.SignedUp)) return Result<Subscription>.Fail(SignUpError.SubscriptionNotFound);
 
             subscription.ChangeStatus(SubscriptionStatus.Unsubscribed);
 
