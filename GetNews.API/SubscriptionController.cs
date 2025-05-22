@@ -13,6 +13,8 @@ namespace GetNews.API
     { 
         public static async Task<object> SignUp(SubscriptionSignUp subscriptionSignUp, IOptions<AppConfig> options)
         {
+            //hvorfor ligger ikke Emailsjekken i SubscriptionSignUp istede for SubscriptionService?
+
             var basePath = options.Value.BasePath;
             // IO
             var emailAddress = subscriptionSignUp.EmailAddress;

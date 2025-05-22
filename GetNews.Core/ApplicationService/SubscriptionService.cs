@@ -7,14 +7,12 @@ namespace GetNews.Core.ApplicationService
 
         public static Result<EmailAndSubscription> SignUp(string emailAddressStr, Subscription? subscription)
         {
-            var emailAddress = new EmailAddress(emailAddressStr);
-            if (!emailAddress.IsValid())
+            
+            if (!new EmailAddress(emailAddressStr).IsValid())
                 return Result<EmailAndSubscription>.Fail(SignUpError.InvalidEmailAddress);
             if (subscription?.Status == SubscriptionStatus.Verified)
                 return Result<EmailAndSubscription>.Fail(SignUpError.AlreadySubscribed);
             subscription ??= new Subscription(emailAddressStr);
-
-            var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
 
             if (subscription.Status == SubscriptionStatus.Unsubscribed)
             {
@@ -22,7 +20,9 @@ namespace GetNews.Core.ApplicationService
                 subscription.RegenerateVerificationCode();
             }
 
+            var mail = Email.CreateConfirmEmail(emailAddressStr, subscription.VerificationCode);
             var emailAndSubscription = new EmailAndSubscription(mail, subscription);
+            
             return Result<EmailAndSubscription>.Ok(emailAndSubscription);
         }
 
