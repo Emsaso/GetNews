@@ -1,4 +1,3 @@
-<!--? Hvordan ser dette ut? 
 
 ## 📌 Introduksjon til prosjektet og læringsoppsummering
 
@@ -76,7 +75,7 @@ emailSender.Send(mail); // ny kode
 ## 📆 Sekvensdiagram og forklaring
 
 ### A: Tegne abonnement (`POST /subscribe`)
--->
+
 ```mermaid
 sequenceDiagram
     participant Klient
@@ -91,7 +90,7 @@ sequenceDiagram
     SubscriptionService-->>API: Result<EmailAndSubscription>
     API-->>Klient: 200 OK med bekreftelsesinfo
 ```
-<!--
+
 **Forklaring:**
 - Klienten sender en forespørsel til API-et med e-post.
 - API-et sender kall til `SubscriptionService.SignUp()`.
@@ -99,7 +98,7 @@ sequenceDiagram
 - Resultatet returneres til klienten som en bekreftelse.
 
 ### B: Bekrefte abonnement (`POST /confirm`)
--->
+
 ```mermaid
 sequenceDiagram
     participant Klient
@@ -111,7 +110,7 @@ sequenceDiagram
     SubscriptionService-->>API: Result.Success/Fail
     API-->>Klient: 200 OK eller 400 Bad Request
 ```
-<!--
+
 **Forklaring:**
 - Klienten sender verifiseringskode og e-post.
 - API-et sender dette til `SubscriptionService.Verify()`.
@@ -140,7 +139,7 @@ Tjenesten tillater brukere å :
 ## Helt overordnet
 [Modellering av Prosjektet](./model/getnews.md)
 
-<!--?  Hva synes dere om denne endringen?
+
 Prosjektet er delt inn i tre hovedkomponenter:
 * **API**: Ansvarlig for grensesnitt mot eksterne systemer/frontend
 * **Core**: Inneholder kjernelogikken og forretningsreglene
@@ -160,7 +159,7 @@ Dette laget implementerer all forretningslogikk for håndtering av abonnementer,
 ### Test-laget
 Se [Modellering av testene](./model/testModel.md) for en visuell oversikt over teststrukturen.
 Vårt testregime har oppnådd en testdekning på 99% i kjernelaget, noe som sikrer robusthet og kvalitet i de fleste funksjoner.
--->
+
 
 Tre prosjekter: 
 - API
@@ -258,11 +257,11 @@ For å kjøre prosjektet kreves følgende
 * **Visual Studio Code**: For brukere som foretrekker VSC her er en [Anbefalt Arbeidsområde for VSC](https://vscode.dev/profile/github/4c4bde0a91b6c89df4bdfc6f5f022189)
 
 ## Oppsumering
-<!--? Hva synes dere om denne implementasjonen av oppsumering?
+?
 Gjennom prosjektet har det vært utfordrende å forstå herakiet, og sette seg inn i hvordan fungerer koden. 
 Vi løste det med å lage diagrammer som viser mappe herakiet, modellering av klassene, og deres ansvar ved bruk av klasse diagram.
 I begynnelsen har det vært en utfordring  med team dynamikk, og tenke som en enhet. Dette løste vi med å ha struktur i koden og spille spill på fredager  30 min -1t,
-der vi øver på kommunikasjon og team building. -->
+der vi øver på kommunikasjon og team building.
 
 ##  Utvikler notater
 Dette prosjektet er representert som et løsningsforslag for denne utfordringen.
