@@ -80,9 +80,10 @@ emailSender.Send(mail); // ny kode
 sequenceDiagram
     participant Klient
     participant API/SubscriptionController
+    participant SubscriptionFileReposetory
     participant SubscriptionService
     participant Email
-    participant SubscriptionFileReposetory
+
     
 
     Klient->>API/SubscriptionController: POST /subscribe med e-post
