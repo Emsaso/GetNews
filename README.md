@@ -79,16 +79,21 @@ emailSender.Send(mail); // ny kode
 ```mermaid
 sequenceDiagram
     participant Klient
-    participant API (SubscriptionController)
+    participant API/SubscriptionController
     participant SubscriptionService
     participant Email
+    participant SubscriptionFileReposetory
+    
 
-    Klient->>API: POST /subscribe med e-post
-    API->>SubscriptionService: SignUp(email, subscription?)
+    Klient->>API/SubscriptionController: POST /subscribe med e-post
+    API/SubscriptionController->>SubscriptionService: SignUp(email, subscription?)
+    SubscriptionService->>SubscriptionFileReposetory: LoadSubscription(string emailAddress, string basePath)
+    SubscriptionFileReposetory->>SubscriptionFileReposetory: CreateDirAndGetFileName(string emailAddress, string basePath)
+    SubscriptionFileReposetory->>Subscription: new Subscription<object>
     SubscriptionService->>Email: CreateConfirmEmail()
     Email-->>SubscriptionService: Email-objekt
-    SubscriptionService-->>API: Result<EmailAndSubscription>
-    API-->>Klient: 200 OK med bekreftelsesinfo
+    SubscriptionService-->>API/SubscriptionController: Result<EmailAndSubscription>
+    API/SubscriptionController-->>Klient: 200 OK med bekreftelsesinfo
 ```
 
 **Forklaring:**
@@ -96,6 +101,7 @@ sequenceDiagram
 - API-et sender kall til `SubscriptionService.SignUp()`.
 - Hvis e-posten er gyldig og ny/ikke-verifisert, genereres en verifiseringskode og en bekreftelses-e-post via `Email.CreateConfirmEmail()`.
 - Resultatet returneres til klienten som en bekreftelse.
+- Result<T> er en generic som brukes som en felles resultat håndterer
 
 ### B: Bekrefte abonnement (`POST /confirm`)
 
