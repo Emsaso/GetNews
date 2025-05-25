@@ -112,19 +112,23 @@ sequenceDiagram
     participant SubscriptionController
     participant SubscriptionFileRepository
     participant Mapper
-    participant Subscription
     participant SubscriptionService
+    participant Subscription
 
+    Klient->>SubscriptionController: POST /confirm (email + code)
+    SubscriptionController->>SubscriptionFileRepository: LoadSubscription(email, basePath)
+    SubscriptionFileRepository->>Mapper: ToDomainModel(ApiSubscription)
+    Mapper->>Subscription: new Subscription(...)
+    SubscriptionController->>SubscriptionService: Verify(email, code, subscription)
+    SubscriptionService->>Subscription: subscription.Verify(code)
+    SubscriptionService-->>SubscriptionController: Result<Subscription>
+    alt result.IsSuccess
+        SubscriptionController->>SubscriptionFileRepository: SaveSubscription(subscription, basePath)
+        SubscriptionController-->>Klient: { IsSuccess: true }
+    else result.IsFail
+        SubscriptionController-->>Klient: { IsSuccess: false, error: ... }
+    end
 
-    Klient->>SubscriptionController: POST /confirm med kode og e-post
-    SubscriptionController->>SubscriptionFileRepository: LoadSubscription(string emailAddress, string basePath) 
-    SubscriptionFileRepository->>Mapper: ToDomainModel(ApiSubscription subscription)
-    Mapper->>Subscription: new Subscription
-    Subscription->>SubscriptionController: Verify()
-    SubscriptionController->>SubscriptionService: Verify(email, code)
-    SubscriptionController->>SubscriptionFileRepository.SaveSubscription(result.Value, basePath)
-    SubscriptionService-->>SubscriptionController: Result.Success/Fail
-    SubscriptionController-->>Klient: 200 OK eller 400 Bad Request
 ```
 
 **Forklaring:**
