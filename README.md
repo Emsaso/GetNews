@@ -165,11 +165,15 @@ Prosjektet er delt inn i tre hovedkomponenter:
 * **Core**: Inneholder kjernelogikken og forretningsreglene
 * **Test**: Omfatter enhetstester og integrasjonstester.
 
-### Dataflyt og mønstere
+### Dataflyt og mønstre
+
 Systemet benytter et mønster for dataflyt som kan visualiseres som:
+
 ```mermaid
-%% Input/Output(IO) -> Kall til kjerne -> IO
-Denne [linken]() Inneholder en mer detaljert forklaring av dataflyten.
+graph LR
+    A[Input/Output (IO)] --> B[Kall til Kjerne]
+    B --> C[Input/Output (IO)]
+
 
 ```
 ### Core-laget
