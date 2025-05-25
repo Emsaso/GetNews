@@ -109,20 +109,22 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant Klient
-    participant API (SubscriptionController)
+    participant SubscriptionController
     participant SubscriptionFileRepository
+    participant Mapper
+    participant Subscription
     participant SubscriptionService
 
 
-    Klient->>API: POST /confirm med kode og e-post
-    API->>SubscriptionFileRepository: LoadSubscription(string emailAddress, string basePath) 
+    Klient->>SubscriptionController: POST /confirm med kode og e-post
+    SubscriptionController->>SubscriptionFileRepository: LoadSubscription(string emailAddress, string basePath) 
     SubscriptionFileRepository->>Mapper
     Mapper->>Subscription
     Subscription->>Mapper
     Mapper->>SubscriptionController
     SubscriptionController->>SubscriptionService: Verify(email, code)
-    SubscriptionService-->>API: Result.Success/Fail
-    API-->>Klient: 200 OK eller 400 Bad Request
+    SubscriptionService-->>SubscriptionController: Result.Success/Fail
+    SubscriptionController-->>Klient: 200 OK eller 400 Bad Request
 ```
 
 **Forklaring:**
