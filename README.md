@@ -172,7 +172,7 @@ Systemet benytter et mønster for dataflyt som kan visualiseres som:
 ```mermaid
 graph LR
   IO1[Input/Output (IO)] --> Kjerne[Kall til Kjerne]
-  Kjerne --> IO2[Input/Output (IO)]
+  Kjerne --> IO2[Input/Output IO]
 
 ```
 ### Core-laget
