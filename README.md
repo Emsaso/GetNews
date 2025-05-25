@@ -118,11 +118,11 @@ sequenceDiagram
 
     Klient->>SubscriptionController: POST /confirm med kode og e-post
     SubscriptionController->>SubscriptionFileRepository: LoadSubscription(string emailAddress, string basePath) 
-    SubscriptionFileRepository->>Mapper
-    Mapper->>Subscription
-    Subscription->>Mapper
-    Mapper->>SubscriptionController
+    SubscriptionFileRepository->>Mapper: ToDomainModel(ApiSubscription subscription)
+    Mapper->>Subscription: new Subscription
+    Subscription->>SubscriptionController: Verify()
     SubscriptionController->>SubscriptionService: Verify(email, code)
+    SubscriptionController->>SubscriptionFileRepository.SaveSubscription(result.Value, basePath)
     SubscriptionService-->>SubscriptionController: Result.Success/Fail
     SubscriptionController-->>Klient: 200 OK eller 400 Bad Request
 ```
