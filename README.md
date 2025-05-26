@@ -1,6 +1,5 @@
 
 ## 📌 Introduksjon til prosjektet og læringsoppsummering
-
 Velkommen som utvikler på Terje sitt prosjekt! Dette prosjektet er en modulbasert, 
 objektorientert webapplikasjon hvor hovedmålet er å håndtere nyhetsabonnement (typisk e-postbasert) med registrering, 
 verifisering og statusadministrasjon. 
@@ -9,7 +8,6 @@ Alt er strukturert for å være utvidbart og lett å vedlikeholde,
 og koden er skrevet etter prinsipper som **Pure Code** og tydelig separasjon av ansvar.
 
 ### 🔍 Hva vi har lært så langt
-
 1. **Objektorientering og strukturering av kode**
    - Vi har laget egne domeneklasser som `EmailAddress`, `Subscription`, `Email`, og `SubscriptionService`.
    - Dette gir god kapsling av logikk og gjør det lettere å endre én del uten å påvirke resten.
@@ -32,7 +30,6 @@ og koden er skrevet etter prinsipper som **Pure Code** og tydelig separasjon av 
 ---
 
 ## 🧠 Viktige punkter i arkitekturen
-
 - **Tydelig separasjon av ansvar**  
   Domenelogikken ligger i `Core.DomainModel`. 
   Ingen sideeffekter (som database eller e-post) skjer her – det gjør koden enklere å forstå og teste.
@@ -75,7 +72,6 @@ emailSender.Send(mail); // ny kode
 ## 📆 Sekvensdiagram og forklaring
 
 ### A: Tegne abonnement (`POST /subscribe`)
-
 ```mermaid
 sequenceDiagram
     participant Klient
@@ -105,7 +101,6 @@ sequenceDiagram
 - Result<T> er en generic som brukes som en felles resultat håndterer
 
 ### B: Bekrefte abonnement (`POST /confirm`)
-
 ```mermaid
 sequenceDiagram
     participant Klient
@@ -139,7 +134,6 @@ sequenceDiagram
 
 
 ## 📦 Oppsummering
-
 Prosjektet er bygd opp for å være fleksibelt og testbart. Du kan lett plugge inn databaser og e-postsystemer uten å endre domenelogikken. 
 Dette gir deg som utvikler et solid utgangspunkt for å bygge videre eller koble opp ekte tjenester etter behov.
 
@@ -280,11 +274,13 @@ For å kjøre prosjektet kreves følgende
 * **Visual Studio Code**: For brukere som foretrekker VSC her er en [Anbefalt Arbeidsområde for VSC](https://vscode.dev/profile/github/4c4bde0a91b6c89df4bdfc6f5f022189)
 
 ## Oppsumering
-?
+
+
 Gjennom prosjektet har det vært utfordrende å forstå herakiet, og sette seg inn i hvordan fungerer koden. 
 Vi løste det med å lage diagrammer som viser mappe herakiet, modellering av klassene, og deres ansvar ved bruk av klasse diagram.
 I begynnelsen har det vært en utfordring  med team dynamikk, og tenke som en enhet. Dette løste vi med å ha struktur i koden og spille spill på fredager  30 min -1t,
 der vi øver på kommunikasjon og team building.
+
 
 ##  Utvikler notater
 Dette prosjektet er representert som et løsningsforslag for denne utfordringen.
