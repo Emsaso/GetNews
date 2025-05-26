@@ -143,7 +143,7 @@ Velkommen på laget – og spør gjerne hvis noe er uklart!
 
 
 
-#   GetNews - Nyhetsbrev-backend
+[: <> GetNews - Nyhetsbrev-backend
 Prosjektet GetNews omhandler utviklingen av en backend-tjeneste for et nyhetsbrev.
 Tjenesten tillater brukere å :
 * Påmelding av nyhetsbrevet
@@ -190,9 +190,7 @@ Ulike modeller og mapping.
 Forklare mønsteret IO -> kalle kjerne -> IO
 Ev. IO -> kalle kjerne -> IO -> kalle kjerne -> IO
 
-Vise til video fra youtube
-
-
+Vise til video fra youtube 
 
 ### Core
 Se over [Modellering av core](./model/core.md) for å få et visuelt bilde av hvordan testene fungerer.
@@ -286,4 +284,4 @@ der vi øver på kommunikasjon og team building.
 Dette prosjektet er representert som et løsningsforslag for denne utfordringen.
 
 Have a glorious day further,
-[Kimser91](https://github.com/Kimser91), [krigjo25](https://github.com/krigjo25) & [Emsaso](https://github.com/emsaso)
+[Kimser91](https://github.com/Kimser91), [krigjo25](https://github.com/krigjo25) & [Emsaso](https://github.com/emsaso)]: #
