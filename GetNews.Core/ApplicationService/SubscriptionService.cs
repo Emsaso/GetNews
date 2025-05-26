@@ -31,11 +31,12 @@ namespace GetNews.Core.ApplicationService
             if (subscription.VerificationCode != verificationCode) 
                 return Result<Subscription>.Fail(SignUpError.InvalidVerificationCode);
 
+            userMail = new EmailAddress(userMail).Value;
             if (!new EmailAddress(subscription.EmailAddress).IsEqual(userMail))
                 return Result<Subscription>.Fail(SignUpError.InvalidEmailAddress);
 
             if (subscription.IsVerified && subscription.Status == SubscriptionStatus.Verified) 
-                return Result<Subscription>.Fail(SignUpError.AlreadySubscribed);
+                return Result<Subscription>.Fail(SignUpError.AlreadyVerified);
             
             if (subscription.Status == SubscriptionStatus.Unsubscribed)
                 return Result<Subscription>.Fail(SignUpError.CannotVerifyWhenUnsubscribed);
