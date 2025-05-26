@@ -122,7 +122,7 @@ namespace GetNews.Core.Test
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
             Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.CannotVerifyWhenUnsubscribed)));
         }
-    
+
         /*
          * Del 3 - Test Unsubscribe
          */
@@ -151,6 +151,47 @@ namespace GetNews.Core.Test
             Assert.That(result.Value.Email, Is.InstanceOf<Email>());
             Assert.That(result.Value.Subscription, Is.EqualTo(subscription));
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.SignedUp));
+        }
+        
+        [Test]
+        public void TestUnsubscribedWithfakeEmailAddress()
+        {
+            var userEmail = "no-replay@getAcademy.no";
+            var subscription = new Subscription(userEmail, SubscriptionStatus.SignedUp, null, true, lastStatusChange: new DateOnly(2025, 4, 1));
+
+
+            var fakeEmail = "no-replay@getAcademyno";
+            var result = SubscriptionService.Unsubscribe(fakeEmail, subscription);
+
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.EqualTo(SignUpError.Unknown.ToString()).Or.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
+        }
+        public void TestUnsubscribedWithSignedUpAndIsVerified()
+        {;
+
+            var userEmail = "no-replay@getAcademy.no";
+
+
+            var subscription = new Subscription(userEmail, SubscriptionStatus.SignedUp, null, true, lastStatusChange: new DateOnly(2025, 4, 1));
+
+            var result = SubscriptionService.Unsubscribe(subscription.EmailAddress, subscription);
+
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.EqualTo(SignUpError.Unknown.ToString()).Or.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
+        }
+        [Test]
+        public void TestUnsubscribedWithSignedUpAndIsNotVerified()
+        {
+
+            var userEmail = "no-replay@getAcademy.no";
+
+
+            var subscription = new Subscription(userEmail, SubscriptionStatus.SignedUp, null, false, lastStatusChange: new DateOnly(2025, 4, 1));
+
+            var result = SubscriptionService.Unsubscribe(subscription.EmailAddress, subscription);
+
+            Assert.That(result.IsSuccess, Is.False);
+            Assert.That(result.Error, Is.EqualTo(SignUpError.Unknown.ToString()).Or.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
         }
     }
 }
