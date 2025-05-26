@@ -59,12 +59,14 @@ namespace GetNews.Core.Test
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress, SubscriptionStatus.Verified, null, true);
 
-            var confirm = SubscriptionService.Verify(emailAddress, Guid.NewGuid(), subscription);
+            var confirm = SubscriptionService.Verify(emailAddress, subscription.VerificationCode, subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
+            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.AlreadyVerified)));
+
             Assert.That(subscription.IsVerified, Is.True);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Verified));
-            Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.AlreadyVerified)));
+            
 
         }
 
@@ -104,7 +106,7 @@ namespace GetNews.Core.Test
             var confirm = SubscriptionService.Verify(emailAddress, subscription.VerificationCode, subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
-            Assert.That(subscription.IsVerified, Is.True);
+            Assert.That(subscription.IsVerified, Is.False);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
             Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.CannotVerifyWhenUnsubscribed)));
         }
@@ -115,10 +117,10 @@ namespace GetNews.Core.Test
             var emailAddress = "no-replay@getAcademy.no";
             var subscription = new Subscription(emailAddress, SubscriptionStatus.Unsubscribed);
 
-            var confirm = SubscriptionService.Verify(emailAddress, Guid.NewGuid(), subscription);
+            var confirm = SubscriptionService.Verify(emailAddress, subscription.VerificationCode, subscription);
 
             Assert.That(confirm.IsSuccess, Is.False);
-            Assert.That(subscription.IsVerified, Is.True);
+            Assert.That(subscription.IsVerified, Is.False);
             Assert.That(subscription.Status, Is.EqualTo(SubscriptionStatus.Unsubscribed));
             Assert.That(confirm.Error, Is.EqualTo(nameof(SignUpError.CannotVerifyWhenUnsubscribed)));
         }
@@ -185,13 +187,12 @@ namespace GetNews.Core.Test
 
             var userEmail = "no-replay@getAcademy.no";
 
-
             var subscription = new Subscription(userEmail, SubscriptionStatus.SignedUp, null, false, lastStatusChange: new DateOnly(2025, 4, 1));
 
             var result = SubscriptionService.Unsubscribe(subscription.EmailAddress, subscription);
 
             Assert.That(result.IsSuccess, Is.False);
-            Assert.That(result.Error, Is.EqualTo(SignUpError.Unknown.ToString()).Or.EqualTo(SignUpError.InvalidEmailAddress.ToString()));
+            Assert.That(result.Error, Is.EqualTo(SignUpError.SubscriptionNotFound.ToString()));
         }
     }
 }
